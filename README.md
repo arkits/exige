@@ -1,2 +1,2 @@
-# exige-react
+# Exige React
  
