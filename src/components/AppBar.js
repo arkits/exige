@@ -11,9 +11,9 @@ function AppBar() {
                         <Heading node="h1">-/Exige</Heading>
                     </Col>
                     <Col s={3} style={{ textAlign: 'right' }}>
-                        <Link href="/composer">Composer</Link>
+                        <Link href="/exige-react/composer">Composer</Link>
                         <span style={{ padding: 20 }} />
-                        <Link href="/visualizer">Visualizer</Link>
+                        <Link href="/exige-react/visualizer">Visualizer</Link>
                     </Col>
                 </Row>
             </Header>
