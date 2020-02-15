@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeProvider, createTheme, Arwes, Header, Row, Col, Heading, Link } from 'arwes';
+import { ThemeProvider, createTheme, Arwes } from 'arwes';
 import Map from './components/Map/Map';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import AppBar from './components/AppBar';
