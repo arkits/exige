@@ -1,23 +1,39 @@
-import React from 'react'
-import { ThemeProvider, createTheme, Arwes, Row } from 'arwes'
-import AppBar from './components/AppBar'
-import Map from './components/Map/Map'
+import React from 'react';
+import { ThemeProvider, createTheme, Arwes, Header, Row, Col, Heading, Link } from 'arwes';
+import Map from './components/Map/Map';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import AppBar from './components/AppBar';
+
+function Visualizer() {
+    return <h2>Visualizer</h2>;
+}
 
 function App() {
     return (
         <div className="App">
-            <ThemeProvider theme={createTheme()}>
-                <Arwes animate={false} show={false}>
-                    <AppBar />
-                    <Row>
+            <Router>
+                <ThemeProvider theme={createTheme()}>
+                    <Arwes animate>
                         <div style={{ padding: 20 }}>
-                            <Map />
+                            <AppBar/>
+                            <br />
+                            <Switch>
+                                <Route path="/composer">
+                                    <Map />
+                                </Route>
+                                <Route path="/visualizer">
+                                    <Visualizer />
+                                </Route>
+                                <Route path="/">
+                                    <Redirect to="/composer" />
+                                </Route>
+                            </Switch>
                         </div>
-                    </Row>
-                </Arwes>
-            </ThemeProvider>
+                    </Arwes>
+                </ThemeProvider>
+            </Router>
         </div>
-    )
+    );
 }
 
-export default App
+export default App;

@@ -1,19 +1,19 @@
 import React from 'react';
-import { Header, Heading, Button, Row } from 'arwes';
+import { Header, Heading, Row, Link } from 'arwes';
 import { Col } from 'arwes/lib/Grid';
 
 function AppBar() {
     return (
-        <div className="AppBar" style={{ padding: 20 }}>
-            <Header>
-                <Row style={{ padding: 0, margin: 0 }}>
+        <div className="AppBar">
+            <Header animate>
+                <Row style={{ margin: 0 }}>
                     <Col s={9}>
                         <Heading node="h1">-/Exige</Heading>
                     </Col>
                     <Col s={3} style={{ textAlign: 'right' }}>
-                        <Button animate>Composer</Button>
-                        <span style={{ padding: 10 }} />
-                        <Button animate>Visualizer</Button>
+                        <Link href="/composer">Composer</Link>
+                        <span style={{ padding: 20 }} />
+                        <Link href="/visualizer">Visualizer</Link>
                     </Col>
                 </Row>
             </Header>
