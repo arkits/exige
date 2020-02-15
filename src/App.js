@@ -1,7 +1,7 @@
 import React from 'react'
 import { ThemeProvider, createTheme, Arwes, Row } from 'arwes'
 import AppBar from './components/AppBar'
-import Map from './components/Map'
+import Map from './components/Map/Map'
 
 function App() {
     return (

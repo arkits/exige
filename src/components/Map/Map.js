@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import { Col, Row } from 'arwes/lib/Grid'
 import MapGL, { Source, Layer } from 'react-map-gl'
 import { Editor, EditorModes } from 'react-map-gl-draw'
-import MapPanel from './MapPanel'
 import { getFeatureStyle, getEditHandleStyle } from './DrawStyles'
-import { Col, Row } from 'arwes/lib/Grid'
-import axios from 'axios'
+import MapPanel from './MapPanel'
 
 const TOKEN =
     'pk.eyJ1IjoiYXJraXRzIiwiYSI6ImNqc3Bud29jMjAzcWc0OXJ6Y3YzOHltaTcifQ.EMMG5GSbT0T-lD8RGJgnAA'
