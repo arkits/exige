@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider, createTheme, Arwes } from 'arwes';
 import Map from './components/Map/Map';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AppBar from './components/AppBar';
 
 function Visualizer() {
@@ -15,17 +15,14 @@ function App() {
                 <ThemeProvider theme={createTheme()}>
                     <Arwes animate>
                         <div style={{ padding: 20 }}>
-                            <AppBar/>
+                            <AppBar />
                             <br />
                             <Switch>
-                                <Route path="/exige-react/composer">
-                                    <Map />
-                                </Route>
-                                <Route path="/exige-react/visualizer">
+                                <Route path="/visualizer">
                                     <Visualizer />
                                 </Route>
                                 <Route path="/">
-                                    <Redirect to="/exige-react/composer" />
+                                    <Map />
                                 </Route>
                             </Switch>
                         </div>

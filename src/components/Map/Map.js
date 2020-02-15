@@ -4,7 +4,8 @@ import { Col, Row } from 'arwes/lib/Grid';
 import MapGL, { Source, Layer } from 'react-map-gl';
 import { Editor, EditorModes } from 'react-map-gl-draw';
 import { getFeatureStyle, getEditHandleStyle } from './DrawStyles';
-import MapPanel from './MapPanel';
+import MouseLocationPanel from './MouseLocationPanel';
+import Sidebar from '../Composer/Sidebar';
 
 const TOKEN =
     'pk.eyJ1IjoiYXJraXRzIiwiYSI6ImNqc3Bud29jMjAzcWc0OXJ6Y3YzOHltaTcifQ.EMMG5GSbT0T-lD8RGJgnAA';
@@ -71,15 +72,18 @@ class Map extends Component {
         );
     };
 
-    _renderControlPanel = () => {
-        const features = this._editorRef && this._editorRef.getFeatures();
+    _renderMouseLocationPanel = () => {
         return (
-            <MapPanel
+            <MouseLocationPanel
                 containerComponent={this.props.containerComponent}
                 mouseLocation={this.state.mouseLocation}
-                features={features}
             />
         );
+    };
+
+    _renderComposerSidebar = () => {
+        const features = this._editorRef && this._editorRef.getFeatures();
+        return <Sidebar data={features} />;
     };
 
     _updateMouseLocation = e => {
@@ -92,7 +96,6 @@ class Map extends Component {
     };
 
     _handleGridSelectChange = event => {
-
         let zoomLevel = event.target.value;
 
         if (zoomLevel !== 0) {
@@ -154,8 +157,7 @@ class Map extends Component {
 
                             {this._renderDrawTools()}
 
-                            {this._renderControlPanel()}
-                            
+                            {this._renderMouseLocationPanel()}
                         </MapGL>
                     </Col>
 
@@ -174,7 +176,7 @@ class Map extends Component {
                             </select>
                         </h3>
 
-                      
+                        {this._renderComposerSidebar()}
                     </Col>
                 </Row>
             </div>
