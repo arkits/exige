@@ -1,0 +1,11 @@
+html {
+  background-color: black;
+}
+
+.AppBar {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+#gridZoomSelect{
+  font-size: 20px;
+}
