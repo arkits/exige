@@ -13,4 +13,9 @@ yarn install
 yarn start
 ```
 
+### Deployment
 
+```bash
+yarn run build
+yarn run deploy
+```
