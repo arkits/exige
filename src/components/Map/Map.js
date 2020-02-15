@@ -77,6 +77,7 @@ class Map extends Component {
             <MouseLocationPanel
                 containerComponent={this.props.containerComponent}
                 mouseLocation={this.state.mouseLocation}
+                zoomLevel={this.state.gridAdaptationZoomLevel}
             />
         );
     };
