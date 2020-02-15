@@ -1,0 +1,1 @@
+{"version":3,"sources":["base.css"],"names":[],"mappings":"AAAA,KACE,qBACF,CAEA,QACE,qCACF,CAEA,gBACE,cACF","file":"main.621896da.chunk.css","sourcesContent":["html {\n  background-color: black;\n}\n\n.AppBar {\n  font-family: \"IBM Plex Mono\", monospace;\n}\n\n#gridZoomSelect{\n  font-size: 20px;\n}"]}

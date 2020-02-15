@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Exige-React",
+  "name": "Exige is a proof-of-concept traffic visualizer for UAM / UTM data.",
   "icons": [
     {
       "src": "favicon.ico",
