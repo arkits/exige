@@ -1,11 +1,11 @@
 import React from "react";
-import { Project, Code } from "arwes";
+import { Project } from "arwes";
 
 function MapPanel({ mouseLocation }) {
   return (
     <div className="MapPanel">
       <Project header="Mouse Location" icon={null}>
-        <Code>{JSON.stringify(mouseLocation, null, 2)}</Code>
+        <pre style={{fontSize:12}}>{JSON.stringify(mouseLocation, null, 2)}</pre>
       </Project>
     </div>
   );
