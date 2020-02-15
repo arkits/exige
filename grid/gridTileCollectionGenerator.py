@@ -36,12 +36,38 @@ def makeGeoJsonFeature(zoom, xtitle, ytile):
 
 def makeGeoJsonCollection():
 
-    # Entire USA
+    #  -129.7265625,49.61070993807422
+    #  -69.60937499999999,19.973348786110602
+
     zoom = 10
-    xStart = 154
-    xEnd = 286
-    yStart = 358
-    yEnd = 433
+    xStart = 143
+    xEnd = 314
+    yStart = 349
+    yEnd = 454
+
+    # zoom = 9
+    # xStart = 71
+    # xEnd = 157
+    # yStart = 174
+    # yEnd = 227
+
+    # zoom = 8
+    # xStart = 143
+    # xEnd = 78
+    # yStart = 349
+    # yEnd = 113
+
+    # zoom = 11
+    # xStart = 286
+    # xEnd = 628
+    # yStart = 698
+    # yEnd = 908
+
+    # zoom = 12
+    # xStart = 572
+    # xEnd = 1256
+    # yStart = 1396
+    # yEnd = 1816
 
     geoJsonFeatureCollection = {}
     geoJsonFeatureCollection["type"] = "FeatureCollection"
