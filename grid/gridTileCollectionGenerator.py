@@ -51,12 +51,6 @@ def makeGeoJsonCollection():
     # yStart = 174
     # yEnd = 227
 
-    # zoom = 8
-    # xStart = 143
-    # xEnd = 78
-    # yStart = 349
-    # yEnd = 113
-
     # zoom = 11
     # xStart = 286
     # xEnd = 628
