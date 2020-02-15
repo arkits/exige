@@ -122,7 +122,7 @@ class Map extends Component {
                         <MapGL
                             {...viewport}
                             width="100%"
-                            height="100vh"
+                            height="85vh"
                             mapStyle="mapbox://styles/mapbox/dark-v9"
                             mapboxApiAccessToken={TOKEN}
                             onViewportChange={this._updateViewport}
@@ -153,6 +153,9 @@ class Map extends Component {
                             </Source>
 
                             {this._renderDrawTools()}
+
+                            {this._renderControlPanel()}
+                            
                         </MapGL>
                     </Col>
 
@@ -171,7 +174,7 @@ class Map extends Component {
                             </select>
                         </h3>
 
-                        {this._renderControlPanel()}
+                      
                     </Col>
                 </Row>
             </div>
