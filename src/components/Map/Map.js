@@ -1,56 +1,56 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import { Col, Row } from 'arwes/lib/Grid'
-import MapGL, { Source, Layer } from 'react-map-gl'
-import { Editor, EditorModes } from 'react-map-gl-draw'
-import { getFeatureStyle, getEditHandleStyle } from './DrawStyles'
-import MapPanel from './MapPanel'
+import React, { Component } from 'react';
+import axios from 'axios';
+import { Col, Row } from 'arwes/lib/Grid';
+import MapGL, { Source, Layer } from 'react-map-gl';
+import { Editor, EditorModes } from 'react-map-gl-draw';
+import { getFeatureStyle, getEditHandleStyle } from './DrawStyles';
+import MapPanel from './MapPanel';
 
 const TOKEN =
-    'pk.eyJ1IjoiYXJraXRzIiwiYSI6ImNqc3Bud29jMjAzcWc0OXJ6Y3YzOHltaTcifQ.EMMG5GSbT0T-lD8RGJgnAA'
+    'pk.eyJ1IjoiYXJraXRzIiwiYSI6ImNqc3Bud29jMjAzcWc0OXJ6Y3YzOHltaTcifQ.EMMG5GSbT0T-lD8RGJgnAA';
 
 class Map extends Component {
     constructor(props) {
-        super(props)
-        this._editorRef = null
+        super(props);
+        this._editorRef = null;
         this.state = {
             viewport: {
                 latitude: 37.72293542866175,
                 longitude: -122.42614746093749,
-                zoom: 10,
+                zoom: 10
             },
             mode: EditorModes.READ_ONLY,
             selectedFeatureIndex: null,
             mouseLocation: {},
             gridAdaptation: null,
-            gridAdaptationZoomLevel: '10',
-        }
+            gridAdaptationZoomLevel: '10'
+        };
     }
 
     _updateViewport = viewport => {
-        this.setState({ viewport })
-    }
+        this.setState({ viewport });
+    };
 
     _onSelect = options => {
         this.setState({
-            selectedFeatureIndex: options && options.selectedFeatureIndex,
-        })
-    }
+            selectedFeatureIndex: options && options.selectedFeatureIndex
+        });
+    };
 
     _onDelete = () => {
-        const selectedIndex = this.state.selectedFeatureIndex
+        const selectedIndex = this.state.selectedFeatureIndex;
         if (selectedIndex !== null && selectedIndex >= 0) {
-            this._editorRef.deleteFeatures(selectedIndex)
+            this._editorRef.deleteFeatures(selectedIndex);
         }
-    }
+    };
 
     _onUpdate = ({ editType }) => {
         if (editType === 'addFeature') {
             this.setState({
-                mode: EditorModes.EDITING,
-            })
+                mode: EditorModes.EDITING
+            });
         }
-    }
+    };
 
     _renderDrawTools = () => {
         return (
@@ -59,9 +59,7 @@ class Map extends Component {
                     <button
                         className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_polygon"
                         title="Polygon tool (p)"
-                        onClick={() =>
-                            this.setState({ mode: EditorModes.DRAW_POLYGON })
-                        }
+                        onClick={() => this.setState({ mode: EditorModes.DRAW_POLYGON })}
                     />
                     <button
                         className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_trash"
@@ -70,44 +68,52 @@ class Map extends Component {
                     />
                 </div>
             </div>
-        )
-    }
+        );
+    };
 
     _renderControlPanel = () => {
-        const features = this._editorRef && this._editorRef.getFeatures()
+        const features = this._editorRef && this._editorRef.getFeatures();
         return (
             <MapPanel
                 containerComponent={this.props.containerComponent}
                 mouseLocation={this.state.mouseLocation}
                 features={features}
             />
-        )
-    }
+        );
+    };
 
     _updateMouseLocation = e => {
         this.setState({
             mouseLocation: {
                 latitude: e['lngLat'][1],
-                longitude: e['lngLat'][0],
-            },
-        })
-    }
+                longitude: e['lngLat'][0]
+            }
+        });
+    };
 
     _handleGridSelectChange = event => {
-        console.log(event.target.value)
-        this.setState({ gridAdaptationZoomLevel: event.target.value })
-        axios
-            .get(
-                'https://raw.githubusercontent.com/arkits/exige/master/grid/gridTiles.json'
-            )
-            .then(response => {
-                console.log('Got Grid Adaptation!')
-                this.setState({ gridAdaptation: response.data })
-            })
-    }
+
+        let zoomLevel = event.target.value;
+
+        if (zoomLevel !== 0) {
+            this.setState({ gridAdaptationZoomLevel: zoomLevel });
+
+            let gridAdaptationUrl =
+                'https://raw.githubusercontent.com/arkits/exige-react/master/grid/' +
+                zoomLevel +
+                '.json';
+
+            console.log(gridAdaptationUrl);
+
+            axios.get(gridAdaptationUrl).then(response => {
+                console.log('Got Grid Adaptation!');
+                this.setState({ gridAdaptation: response.data });
+            });
+        }
+    };
 
     render() {
-        const { viewport, mode } = this.state
+        const { viewport, mode } = this.state;
         return (
             <div className="Map">
                 <Row>
@@ -133,18 +139,14 @@ class Map extends Component {
                                 editHandleStyle={getEditHandleStyle}
                             />
 
-                            <Source
-                                type="geojson"
-                                data={this.state.gridAdaptation}
-                            >
+                            <Source type="geojson" data={this.state.gridAdaptation}>
                                 <Layer
                                     id="1"
                                     type="fill"
                                     paint={{
                                         'fill-color': 'rgba(255,255,255,0.0)',
-                                        'fill-outline-color':
-                                            'rgba(51, 181, 229,1.0)',
-                                        'fill-opacity': 1,
+                                        'fill-outline-color': 'rgba(51, 181, 229,1.0)',
+                                        'fill-opacity': 1
                                     }}
                                 />
                             </Source>
@@ -160,9 +162,12 @@ class Map extends Component {
                                 value={this.state.value}
                                 onChange={this._handleGridSelectChange}
                             >
-                                 <option value="0">Zoom Level</option>
+                                <option value="0">Zoom Level</option>
+                                <option value="12">12</option>
+                                <option value="11">11</option>
                                 <option value="10">10</option>
                                 <option value="9">9</option>
+                                <option value="8">8</option>
                             </select>
                         </h3>
 
@@ -170,8 +175,8 @@ class Map extends Component {
                     </Col>
                 </Row>
             </div>
-        )
+        );
     }
 }
 
-export default Map
+export default Map;
