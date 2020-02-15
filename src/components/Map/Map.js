@@ -107,6 +107,7 @@ class Map extends Component {
 
             axios.get(gridAdaptationUrl).then(response => {
                 console.log('Got Grid Adaptation!');
+                this.setState({ gridAdaptation: null });
                 this.setState({ gridAdaptation: response.data });
             });
         }
