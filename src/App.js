@@ -18,14 +18,14 @@ function App() {
                             <AppBar/>
                             <br />
                             <Switch>
-                                <Route path="/composer">
+                                <Route path="/exige-react/composer">
                                     <Map />
                                 </Route>
-                                <Route path="/visualizer">
+                                <Route path="/exige-react/visualizer">
                                     <Visualizer />
                                 </Route>
                                 <Route path="/">
-                                    <Redirect to="/composer" />
+                                    <Redirect to="/exige-react/composer" />
                                 </Route>
                             </Switch>
                         </div>
