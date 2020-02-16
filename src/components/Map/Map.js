@@ -6,7 +6,6 @@ import { Editor, EditorModes } from 'react-map-gl-draw';
 import { getFeatureStyle, getEditHandleStyle } from './DrawStyles';
 import MouseLocationPanel from './MouseLocationPanel';
 import Sidebar from '../Composer/Sidebar';
-import '../../styles/Map.css';
 
 const TOKEN =
     'pk.eyJ1IjoiYXJraXRzIiwiYSI6ImNqc3Bud29jMjAzcWc0OXJ6Y3YzOHltaTcifQ.EMMG5GSbT0T-lD8RGJgnAA';
@@ -17,6 +16,8 @@ class Map extends Component {
         this._editorRef = null;
         this.state = {
             viewport: {
+                width: '100%',
+                height: '100%',
                 latitude: 37.72293542866175,
                 longitude: -122.42614746093749,
                 zoom: 10
@@ -54,7 +55,7 @@ class Map extends Component {
         }
     };
 
-    _renderDrawTools = () => {
+    renderDrawTools = () => {
         return (
             <div className="mapboxgl-ctrl-top-left">
                 <div className="mapboxgl-ctrl-group mapboxgl-ctrl">
@@ -73,7 +74,7 @@ class Map extends Component {
         );
     };
 
-    _renderMouseLocationPanel = () => {
+    renderMouseLocationPanel = () => {
         return (
             <MouseLocationPanel
                 containerComponent={this.props.containerComponent}
@@ -83,7 +84,7 @@ class Map extends Component {
         );
     };
 
-    _renderComposerSidebar = () => {
+    renderComposerSidebar = () => {
         const features = this._editorRef && this._editorRef.getFeatures();
         return <Sidebar data={features} />;
     };
@@ -103,12 +104,11 @@ class Map extends Component {
     };
 
     _onMapLoad = () => {
-        console.log("Map Loaded")
+        console.log('Map Loaded');
         this._drawGridTiles(this.state.gridZoomLevel);
-    }
+    };
 
-    _drawGridTiles = (zoomLevel) => {
-
+    _drawGridTiles = zoomLevel => {
         if (zoomLevel !== 0) {
             this.setState({ gridAdaptationZoomLevel: zoomLevel });
 
@@ -123,19 +123,16 @@ class Map extends Component {
                 this.setState({ gridAdaptation: response.data });
             });
         }
-
-    }
+    };
 
     render() {
         const { viewport, mode } = this.state;
         return (
-            <div className="Map">
-                <Row>
-                    <Col s={12} m={9}>
+            <div className="fh">
+                <Row className="fh">
+                    <Col s={9} className="fh">
                         <MapGL
                             {...viewport}
-                            width="100%"
-                            height="85vh"
                             mapStyle="mapbox://styles/mapbox/dark-v9"
                             mapboxApiAccessToken={TOKEN}
                             onViewportChange={this._updateViewport}
@@ -165,31 +162,24 @@ class Map extends Component {
                                     }}
                                 />
                             </Source>
-
-                            {this._renderDrawTools()}
-
-                            {this._renderMouseLocationPanel()}
+                            {this.renderDrawTools()}
+                            {this.renderMouseLocationPanel()}
                         </MapGL>
                     </Col>
-
-                    <Col s={12} m={3}>
-                        <center>
-                            <select
-                                className="gridZoomLevelSelect"
-                                value={this.value}
-                                onChange={this._handleGridZoomLevelSelectChange}
-                            >
-                                <option value="0">Zoom Level</option>
-                                <option value="12">12</option>
-                                <option value="11">11</option>
-                                <option value="10">10</option>
-                                <option value="9">9</option>
-                            </select>
-                            <br />
-                            <br />
-                        </center>
-
-                        {this._renderComposerSidebar()}
+                    <Col s={3} className="fh" style={{ flexDirection: 'column' }}>
+                        <select
+                            className="gridZoomLevelSelect"
+                            value={this.value}
+                            onChange={this._handleGridZoomLevelSelectChange}
+                        >
+                            <option value="0">Zoom Level</option>
+                            <option value="12">12</option>
+                            <option value="11">11</option>
+                            <option value="10">10</option>
+                            <option value="9">9</option>
+                        </select>
+                        <br />
+                        {this.renderComposerSidebar()}
                     </Col>
                 </Row>
             </div>

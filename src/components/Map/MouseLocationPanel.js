@@ -1,6 +1,5 @@
 import React from 'react';
 import { Frame } from 'arwes';
-import '../../styles/MouseLocationPanel.css';
 
 function MouseLocationPanel({ mouseLocation, zoomLevel }) {
     const calcMouseLocationDetail = () => {

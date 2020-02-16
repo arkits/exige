@@ -2,10 +2,22 @@ import React from 'react';
 import { Project } from 'arwes';
 
 function Sidebar({ data }) {
+    const displayOperationVolumes = features => {
+        let operationVolumes = [];
+
+        if (features != null) {
+            features.forEach(feature => {
+                operationVolumes.push(feature.geometry);
+            });
+        }
+
+        return JSON.stringify(operationVolumes, null, 2);
+    };
+
     return (
-        <div className="ComposerSidebar">
-            <Project header="Operation Composer" icon={null}>
-                <pre style={{ fontSize: 12 }}>{JSON.stringify(data, null, 2)}</pre>
+        <div className="fh">
+            <Project className="fh" animate header="Composer" icon={null}>
+                <textarea className="composerSidebarTextarea" value={displayOperationVolumes(data)} />
             </Project>
         </div>
     );

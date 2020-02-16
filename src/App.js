@@ -14,16 +14,17 @@ function App() {
             <ThemeProvider theme={createTheme()}>
                 <Arwes animate>
                     <Router basename={process.env.PUBLIC_URL}>
-                        <div style={{ padding: 20 }}>
-                            <AppBar />
-                            <br />
-                            <div className="AppContent">
+                        <div class="box">
+                            <div class="row">
+                                <AppBar />
+                            </div>
+                            <div class="row content">
                                 <Switch>
                                     <Route path="/about">
                                         <About />
                                     </Route>
                                     <Route path="/">
-                                        <Map />
+                                        <Map className="fh" />
                                     </Route>
                                 </Switch>
                             </div>
