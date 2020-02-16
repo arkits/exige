@@ -1,0 +1,7 @@
+.MouseLocationPanel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 370px;
+    padding: 12px 12px;
+}

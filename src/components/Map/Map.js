@@ -6,6 +6,7 @@ import { Editor, EditorModes } from 'react-map-gl-draw';
 import { getFeatureStyle, getEditHandleStyle } from './DrawStyles';
 import MouseLocationPanel from './MouseLocationPanel';
 import Sidebar from '../Composer/Sidebar';
+import '../../styles/Map.css';
 
 const TOKEN =
     'pk.eyJ1IjoiYXJraXRzIiwiYSI6ImNqc3Bud29jMjAzcWc0OXJ6Y3YzOHltaTcifQ.EMMG5GSbT0T-lD8RGJgnAA';
@@ -163,9 +164,9 @@ class Map extends Component {
                     </Col>
 
                     <Col s={12} m={3}>
-                        <h3>
+                        <center>
                             <select
-                                id="gridZoomSelect"
+                                className="gridLevelSelect"
                                 value={this.state.value}
                                 onChange={this._handleGridSelectChange}
                             >
@@ -175,7 +176,9 @@ class Map extends Component {
                                 <option value="10">10</option>
                                 <option value="9">9</option>
                             </select>
-                        </h3>
+                            <br />
+                            <br />
+                        </center>
 
                         {this._renderComposerSidebar()}
                     </Col>

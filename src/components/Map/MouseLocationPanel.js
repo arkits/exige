@@ -1,5 +1,6 @@
 import React from 'react';
 import { Frame } from 'arwes';
+import '../../styles/MouseLocationPanel.css';
 
 function MouseLocationPanel({ mouseLocation, zoomLevel }) {
     const calcMouseLocationDetail = () => {
@@ -10,6 +11,7 @@ function MouseLocationPanel({ mouseLocation, zoomLevel }) {
 
         // Conversion from co-ordinate to Slippy X/Y adapted from
         // https://github.com/interuss/dss/blob/legacy/tcl4/datanode/src/slippy_util.py  
+        
         let latitude_rad = Math.PI * (mouseLocation['latitude'] / 180);
         let n = 2.0 ** zoomLevel;
         let xtile = Math.trunc(((mouseLocation['longitude'] + 180.0) / 360.0) * n);

@@ -2,6 +2,7 @@ import React from 'react';
 import { Header, Heading, Row } from 'arwes';
 import { Link } from 'react-router-dom';
 import { Col } from 'arwes/lib/Grid';
+import '../styles/NavBar.css';
 
 function AppBar() {
     return (
@@ -12,9 +13,9 @@ function AppBar() {
                         <Heading node="h1">-/Exige</Heading>
                     </Col>
                     <Col s={3} style={{ textAlign: 'right' }}>
-                        <Link to="/">Home</Link>
+                        <Link className="navLink" to="/">Home</Link>
                         <span style={{ padding: 20 }} />
-                        <Link to="/about">About</Link>
+                        <Link className="navLink" to="/about">About</Link>
                     </Col>
                 </Row>
             </Header>
