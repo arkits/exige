@@ -25,7 +25,7 @@ class Map extends Component {
             selectedFeatureIndex: null,
             mouseLocation: {},
             gridAdaptation: null,
-            gridAdaptationZoomLevel: '10'
+            gridZoomLevel: '10'
         };
     }
 
@@ -78,7 +78,7 @@ class Map extends Component {
             <MouseLocationPanel
                 containerComponent={this.props.containerComponent}
                 mouseLocation={this.state.mouseLocation}
-                zoomLevel={this.state.gridAdaptationZoomLevel}
+                zoomLevel={this.state.gridZoomLevel}
             />
         );
     };
@@ -97,8 +97,17 @@ class Map extends Component {
         });
     };
 
-    _handleGridSelectChange = event => {
+    _handleGridZoomLevelSelectChange = event => {
         let zoomLevel = event.target.value;
+        this._drawGridTiles(zoomLevel);
+    };
+
+    _onMapLoad = () => {
+        console.log("Map Loaded")
+        this._drawGridTiles(this.state.gridZoomLevel);
+    }
+
+    _drawGridTiles = (zoomLevel) => {
 
         if (zoomLevel !== 0) {
             this.setState({ gridAdaptationZoomLevel: zoomLevel });
@@ -108,15 +117,14 @@ class Map extends Component {
                 zoomLevel +
                 '.json';
 
-            console.log(gridAdaptationUrl);
-
             axios.get(gridAdaptationUrl).then(response => {
                 console.log('Got Grid Adaptation!');
                 this.setState({ gridAdaptation: null });
                 this.setState({ gridAdaptation: response.data });
             });
         }
-    };
+
+    }
 
     render() {
         const { viewport, mode } = this.state;
@@ -132,6 +140,7 @@ class Map extends Component {
                             mapboxApiAccessToken={TOKEN}
                             onViewportChange={this._updateViewport}
                             onMouseMove={this._updateMouseLocation}
+                            onLoad={this._onMapLoad}
                         >
                             <Editor
                                 ref={_ => (this._editorRef = _)}
@@ -166,9 +175,9 @@ class Map extends Component {
                     <Col s={12} m={3}>
                         <center>
                             <select
-                                className="gridLevelSelect"
-                                value={this.state.value}
-                                onChange={this._handleGridSelectChange}
+                                className="gridZoomLevelSelect"
+                                value={this.value}
+                                onChange={this._handleGridZoomLevelSelectChange}
                             >
                                 <option value="0">Zoom Level</option>
                                 <option value="12">12</option>
