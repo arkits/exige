@@ -4,31 +4,33 @@ import Map from './components/Map/Map';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AppBar from './components/AppBar';
 
-function Visualizer() {
-    return <h2>Visualizer</h2>;
+function About() {
+    return <h2>About</h2>;
 }
 
 function App() {
     return (
         <div className="App">
-            <Router>
-                <ThemeProvider theme={createTheme()}>
-                    <Arwes animate>
+            <ThemeProvider theme={createTheme()}>
+                <Arwes animate>
+                    <Router basename={process.env.PUBLIC_URL}>
                         <div style={{ padding: 20 }}>
                             <AppBar />
                             <br />
-                            <Switch>
-                                <Route path="/visualizer">
-                                    <Visualizer />
-                                </Route>
-                                <Route path="/">
-                                    <Map />
-                                </Route>
-                            </Switch>
+                            <div className="AppContent">
+                                <Switch>
+                                    <Route path="/about">
+                                        <About />
+                                    </Route>
+                                    <Route path="/">
+                                        <Map />
+                                    </Route>
+                                </Switch>
+                            </div>
                         </div>
-                    </Arwes>
-                </ThemeProvider>
-            </Router>
+                    </Router>
+                </Arwes>
+            </ThemeProvider>
         </div>
     );
 }

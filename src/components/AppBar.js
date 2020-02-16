@@ -1,5 +1,6 @@
 import React from 'react';
-import { Header, Heading, Row, Link } from 'arwes';
+import { Header, Heading, Row } from 'arwes';
+import { Link } from 'react-router-dom';
 import { Col } from 'arwes/lib/Grid';
 
 function AppBar() {
@@ -11,9 +12,9 @@ function AppBar() {
                         <Heading node="h1">-/Exige</Heading>
                     </Col>
                     <Col s={3} style={{ textAlign: 'right' }}>
-                        <Link href="/exige-react/composer">Composer</Link>
+                        <Link to="/">Home</Link>
                         <span style={{ padding: 20 }} />
-                        <Link href="/exige-react/visualizer">Visualizer</Link>
+                        <Link to="/about">About</Link>
                     </Col>
                 </Row>
             </Header>
