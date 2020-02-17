@@ -7,11 +7,11 @@ function AppBar() {
     return (
         <div className="AppBar" style={{ padding: 20 }}>
             <Header animate>
-                <Row style={{ margin: 0 }}>
-                    <Col s={9}>
+                <Row style={{ margin: 0, display:'flex', alignItems:'stretch' }}>
+                    <Col s={12} m={9}>
                         <Heading node="h1">-/Exige</Heading>
                     </Col>
-                    <Col s={3} style={{ textAlign: 'right' }}>
+                    <Col s={12} m={3} style={{ textAlign: 'right' }}>
                         <Link className="navLink" to="/">
                             Home
                         </Link>
