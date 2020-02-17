@@ -3,8 +3,9 @@ import { ThemeProvider, createTheme, Arwes } from 'arwes';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import AppBar from './components/AppBar';
-import Map from './components/Map/Map';
 import About from './components/About';
+import ComposerView from './components/Composer/View';
+import DashboardView from './components/Dashboard/View';
 
 function App() {
     return (
@@ -21,8 +22,11 @@ function App() {
                                     <Route path="/about">
                                         <About />
                                     </Route>
+                                    <Route path="/dashboard">
+                                        <DashboardView className="fh" />
+                                    </Route>
                                     <Route path="/">
-                                        <Map className="fh" />
+                                        <ComposerView className="fh" />
                                     </Route>
                                 </Switch>
                             </div>

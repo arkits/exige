@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Col, Row } from 'arwes/lib/Grid';
+import { Col, Row } from 'arwes';
 import MapGL, { Source, Layer } from 'react-map-gl';
 import { Editor, EditorModes } from 'react-map-gl-draw';
-import { getFeatureStyle, getEditHandleStyle } from './DrawStyles';
-import MouseLocationPanel from './MouseLocationPanel';
-import Sidebar from '../Composer/Sidebar';
+import { getFeatureStyle, getEditHandleStyle } from '../Map/DrawStyles';
+import MouseLocationPanel from '../Map/MouseLocationPanel';
+import Sidebar from './Sidebar';
 
 const TOKEN =
     'pk.eyJ1IjoiYXJraXRzIiwiYSI6ImNqc3Bud29jMjAzcWc0OXJ6Y3YzOHltaTcifQ.EMMG5GSbT0T-lD8RGJgnAA';
 
-class Map extends Component {
+class ComposerView extends Component {
     constructor(props) {
         super(props);
         this._editorRef = null;
@@ -136,6 +136,7 @@ class Map extends Component {
             <div className="fh">
                 <Row className="fh">
                     <Col s={9} className="fh">
+                    <h1>{this.props.viewType}</h1>
                         <MapGL
                             {...viewport}
                             mapStyle="mapbox://styles/mapbox/dark-v9"
@@ -192,4 +193,4 @@ class Map extends Component {
     }
 }
 
-export default Map;
+export default ComposerView;
