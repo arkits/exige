@@ -1,12 +1,10 @@
 import React from 'react';
 import { ThemeProvider, createTheme, Arwes } from 'arwes';
-import Map from './components/Map/Map';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import AppBar from './components/AppBar';
 
-function About() {
-    return <h2>About</h2>;
-}
+import AppBar from './components/AppBar';
+import Map from './components/Map/Map';
+import About from './components/About';
 
 function App() {
     return (
