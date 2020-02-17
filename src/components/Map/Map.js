@@ -18,8 +18,8 @@ class Map extends Component {
             viewport: {
                 width: '100%',
                 height: '100%',
-                latitude: 37.72293542866175,
-                longitude: -122.42614746093749,
+                latitude: 37.719,
+                longitude: -122.344,
                 zoom: 10
             },
             mode: EditorModes.READ_ONLY,
@@ -89,7 +89,7 @@ class Map extends Component {
         return <Sidebar data={features} />;
     };
 
-    _updateMouseLocation = e => {
+    updateMouseLocation = e => {
         this.setState({
             mouseLocation: {
                 latitude: e['lngLat'][1],
@@ -98,17 +98,22 @@ class Map extends Component {
         });
     };
 
-    _handleGridZoomLevelSelectChange = event => {
+    handleGridZoomLevelSelectChange = event => {
         let zoomLevel = event.target.value;
-        this._drawGridTiles(zoomLevel);
+
+        this.setState({
+            gridZoomLevel: zoomLevel
+        })
+
+        this.drawGridTiles(zoomLevel);
     };
 
-    _onMapLoad = () => {
+    onMapLoad = () => {
         console.log('Map Loaded');
-        this._drawGridTiles(this.state.gridZoomLevel);
+        this.drawGridTiles(this.state.gridZoomLevel);
     };
 
-    _drawGridTiles = zoomLevel => {
+    drawGridTiles = zoomLevel => {
         if (zoomLevel !== 0) {
             this.setState({ gridAdaptationZoomLevel: zoomLevel });
 
@@ -136,8 +141,8 @@ class Map extends Component {
                             mapStyle="mapbox://styles/mapbox/dark-v9"
                             mapboxApiAccessToken={TOKEN}
                             onViewportChange={this._updateViewport}
-                            onMouseMove={this._updateMouseLocation}
-                            onLoad={this._onMapLoad}
+                            onMouseMove={this.updateMouseLocation}
+                            onLoad={this.onMapLoad}
                         >
                             <Editor
                                 ref={_ => (this._editorRef = _)}
@@ -170,7 +175,7 @@ class Map extends Component {
                         <select
                             className="gridZoomLevelSelect"
                             value={this.value}
-                            onChange={this._handleGridZoomLevelSelectChange}
+                            onChange={this.handleGridZoomLevelSelectChange}
                         >
                             <option value="0">Zoom Level</option>
                             <option value="12">12</option>
