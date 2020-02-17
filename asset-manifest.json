@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/exige-react/static/css/main.f3cf601a.chunk.css",
-    "main.js": "/exige-react/static/js/main.93e86829.chunk.js",
-    "main.js.map": "/exige-react/static/js/main.93e86829.chunk.js.map",
+    "main.js": "/exige-react/static/js/main.06d0b7b7.chunk.js",
+    "main.js.map": "/exige-react/static/js/main.06d0b7b7.chunk.js.map",
     "runtime-main.js": "/exige-react/static/js/runtime-main.22b2379e.js",
     "runtime-main.js.map": "/exige-react/static/js/runtime-main.22b2379e.js.map",
     "static/js/2.560bd5d6.chunk.js": "/exige-react/static/js/2.560bd5d6.chunk.js",
     "static/js/2.560bd5d6.chunk.js.map": "/exige-react/static/js/2.560bd5d6.chunk.js.map",
     "index.html": "/exige-react/index.html",
-    "precache-manifest.eee601c50cd84da8469d3dfbd12da3eb.js": "/exige-react/precache-manifest.eee601c50cd84da8469d3dfbd12da3eb.js",
+    "precache-manifest.b2f5e7c77435221e722d2065d369afb3.js": "/exige-react/precache-manifest.b2f5e7c77435221e722d2065d369afb3.js",
     "service-worker.js": "/exige-react/service-worker.js",
     "static/css/main.f3cf601a.chunk.css.map": "/exige-react/static/css/main.f3cf601a.chunk.css.map",
     "static/js/2.560bd5d6.chunk.js.LICENSE.txt": "/exige-react/static/js/2.560bd5d6.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.22b2379e.js",
     "static/js/2.560bd5d6.chunk.js",
     "static/css/main.f3cf601a.chunk.css",
-    "static/js/main.93e86829.chunk.js"
+    "static/js/main.06d0b7b7.chunk.js"
   ]
 }
