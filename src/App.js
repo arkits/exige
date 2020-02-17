@@ -7,6 +7,8 @@ import About from './components/About';
 import ComposerView from './components/Composer/View';
 import DashboardView from './components/Dashboard/View';
 
+import { StoreProvider } from './store/ExigeStore';
+
 function App() {
     return (
         <div className="App">
@@ -18,17 +20,19 @@ function App() {
                                 <AppBar />
                             </div>
                             <div class="row content">
-                                <Switch>
-                                    <Route path="/about">
-                                        <About />
-                                    </Route>
-                                    <Route path="/dashboard">
-                                        <DashboardView className="fh" />
-                                    </Route>
-                                    <Route path="/">
-                                        <ComposerView className="fh" />
-                                    </Route>
-                                </Switch>
+                                <StoreProvider>
+                                    <Switch>
+                                        <Route path="/about">
+                                            <About />
+                                        </Route>
+                                        <Route path="/dashboard">
+                                            <DashboardView className="fh" />
+                                        </Route>
+                                        <Route path="/">
+                                            <ComposerView className="fh" />
+                                        </Route>
+                                    </Switch>
+                                </StoreProvider>
                             </div>
                         </div>
                     </Router>
