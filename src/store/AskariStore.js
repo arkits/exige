@@ -15,6 +15,10 @@ class AskariStore {
     mouseLocation: true,
     positionsTable: false
   };
+  gridTiles = {
+    enabled: false,
+    tilesData: null
+  }
 }
 
 decorate(AskariStore, {
