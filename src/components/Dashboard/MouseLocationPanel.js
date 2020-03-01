@@ -7,7 +7,7 @@ const MouseLocationPanel = observer(() => {
 
     const calcMouseLocationDetail = () => {
         let mouseLocation = askariStore.mouseLocation;
-        let zoomLevel = askariStore.gridZoomLevel;
+        let zoomLevel = askariStore.gridTiles.zoomLevel;
 
         // Conversion from co-ordinate to Slippy X/Y adapted from
         // https://github.com/interuss/dss/blob/legacy/tcl4/datanode/src/slippy_util.py

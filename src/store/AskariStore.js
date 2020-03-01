@@ -5,7 +5,6 @@ class AskariStore {
   sioStatus = "DISCONNECTED";
   positions = {};
   mouseLocation = {};
-  gridZoomLevel = 10;
   snackbar = {
     message: null,
     isOpen: false,
@@ -17,7 +16,8 @@ class AskariStore {
   };
   gridTiles = {
     enabled: false,
-    tilesData: null
+    tilesData: null,
+    zoomLevel: 10
   }
 }
 
