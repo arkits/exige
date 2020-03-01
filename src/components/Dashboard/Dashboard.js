@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react";
 
 import MouseLocationPanel from "./MouseLocationPanel";
-import OptionsBar from "./OptionsBar";
+import OptionsBar from "./OptionsBar/OptionsBar";
 import Map from "./Map";
 import PositionsTable from "./PositionsTable";
 
