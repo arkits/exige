@@ -16,7 +16,7 @@ function App() {
     <div className={classes.root}>
       <SioClient />
       <CssBaseline />
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <NavBar />
         <Switch>
           <Route path="/about">
