@@ -34,7 +34,7 @@ function NavBar() {
           variant="h6"
           className={classes.title}
         >
-          ~/Exige
+          ~/Exige Reborn
         </Typography>
         <Button component={Link} to="/about" color="inherit">
           Debug
