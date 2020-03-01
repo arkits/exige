@@ -32,7 +32,7 @@ const MouseLocationPanel = observer(() => {
             <div style={{ fontFamily: 'IBM Plex Mono', fontWeight: 'bold', fontStyle: 'italic' }}>
                 Mouse Location
             </div>
-            <pre style={{ fontFamily: 'IBM Plex Mono' }}>
+            <pre style={{ fontFamily: 'IBM Plex Mono', fontSize:'11px' }}>
                 {JSON.stringify(calcMouseLocationDetail(), null, 2)}
             </pre>
         </div>
