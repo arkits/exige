@@ -11,6 +11,10 @@ class AskariStore {
     isOpen: false,
     type: null
   };
+  elementsToggle = {
+    mouseLocation: true,
+    positionsTable: false
+  };
 }
 
 decorate(AskariStore, {
@@ -18,7 +22,8 @@ decorate(AskariStore, {
   positions: observable,
   mouseLocation: observable,
   gridZoomLevel: observable,
-  snackbar: observable
+  snackbar: observable,
+  elementsToggle: observable
 });
 
 export const AskariStoreContext = createContext(new AskariStore());
