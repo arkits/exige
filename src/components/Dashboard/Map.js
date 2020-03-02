@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 import { observer } from 'mobx-react';
 import { AskariStoreContext } from '../../store/AskariStore';
@@ -11,6 +11,12 @@ const MapGl = ReactMapboxGl({
 const Map = observer(() => {
     const askariStore = useContext(AskariStoreContext);
 
+    const [viewport, setViewport] = useState({
+      longitude: -122.43438720703125,
+      latitude: 37.77722770873696,
+      zoom: 9
+    });
+
     const positions = Object.values(askariStore.positions);
 
     const updateMouseLocation = (_, e) => {
@@ -18,6 +24,14 @@ const Map = observer(() => {
         askariStore.mouseLocation['lng'] = e['lngLat']['lng'];
     };
 
+    const onViewportChange = (updated) =>{
+      setViewport({
+        ...viewport,
+        longitude: updated.getCenter().lng,
+        latitude: updated.getCenter().lat,
+        zoom: updated.getZoom()
+      })
+    }
     const copyLatLng = (_, e) => {
         let coordinates = {
             lat: e['lngLat']['lat'],
@@ -38,14 +52,17 @@ const Map = observer(() => {
         <div className="Map">
             <MapGl
                 style="mapbox://styles/mapbox/dark-v9"
-                // zoom={[9]}
-                // center={[-122.43438720703125, 37.77722770873696]}
+                zoom={[viewport.zoom]}
+                center={[viewport.longitude, viewport.latitude]}
                 containerStyle={{
                     height: 'calc(100vh - 70px)',
                     width: '100vw'
                 }}
                 onMouseMove={updateMouseLocation}
                 onClick={copyLatLng}
+                onMoveEnd={onViewportChange}
+                onZoomEnd={onViewportChange}
+                onPitchEnd={onViewportChange}
             >
                 >
                 {positions.map(position => {
