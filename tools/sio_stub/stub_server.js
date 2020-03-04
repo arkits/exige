@@ -4,7 +4,7 @@ const socketIo = require("socket.io");
 const cors = require('cors');
 
 //Port from environment variable or default - 4001
-const port = process.env.PORT || 4001;
+const port = process.env.PORT || 8786;
 
 //Setting up express and adding socketIo middleware
 const app = express();
