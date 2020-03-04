@@ -17,10 +17,10 @@ io.on("connection", socket => {
     console.log("New client connected");
 
     //Here we listen on a new namespace called "incoming data"
-    socket.on("incoming data", (data)=>{
+    socket.on("brodcast_position", (data)=>{
         //Here we broadcast it out to all other sockets EXCLUDING the socket which sent us the data
         console.log("emiting - ", data);
-       socket.broadcast.emit("outgoing data", data);
+       socket.broadcast.emit("position", data);
     });
 
     //A special namespace "disconnect" for when a client disconnects

@@ -17,7 +17,7 @@ setInterval(function () {
 
         console.log("emiting - ", payload);
 
-        socket.emit('incoming data', payload);
+        socket.emit('brodcast_position', payload);
 
     }
 
