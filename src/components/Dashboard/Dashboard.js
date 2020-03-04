@@ -4,6 +4,7 @@ import { AskariStoreContext } from '../../store/AskariStore';
 import MouseLocationPanel from './MouseLocationPanel';
 import OptionsBar from './OptionsBar/OptionsBar';
 import Map from './Map';
+import CesiumMap from './CesiumMap';
 import PositionsTable from './PositionsTable';
 
 import './Dashboard.css';
@@ -31,10 +32,8 @@ const RenderPositionsTable = observer(() => {
 const Dashboard = () => {
     return (
         <div className="Dashboard">
-            <Map />
-            <RenderMouseLocationPanel />
-            <RenderPositionsTable />
-            <OptionsBar />
+            <CesiumMap />
+
         </div>
     );
 };
