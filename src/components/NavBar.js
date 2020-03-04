@@ -36,6 +36,9 @@ function NavBar() {
         >
           ~/Exige Reborn
         </Typography>
+        <Button component={Link} to="/inspector" color="inherit">
+          Inspector
+        </Button>
         <Button component={Link} to="/about" color="inherit">
           Debug
         </Button>

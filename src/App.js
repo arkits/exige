@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar";
 import About from "./components/About";
 import SioClient from "./components/SocketIO/SioClient";
 import Dashboard from "./components/Dashboard/Dashboard";
+import Inspector from "./components/Inspector/Inspector";
 import AskariSnackbar from "./components/AskariSnackbar";
 
 function App() {
@@ -24,8 +25,14 @@ function App() {
               <About />
             </Container>
           </Route>
+          <Route path="/inspector">
+            <Container component="main" className={classes.main}>
+              <Inspector />
+            </Container>
+          </Route>
+
           <Route path="/">
-          <Dashboard />
+            <Dashboard />
           </Route>
         </Switch>
       </Router>
