@@ -17,7 +17,7 @@ const SioEvents = observer(() => {
     };
   
     const onData = (data) => {
-      console.log("Data! - ", data);
+      // console.log("Data! - ", data);
       askariStore.positions[data["vehicleId"]] = data;
     };
   
@@ -25,7 +25,7 @@ const SioEvents = observer(() => {
       <>
         <Event event="connect" handler={onConnect} />
         <Event event="disconnect" handler={onDisconnect} />
-        <Event event="outgoing data" handler={onData} />
+        <Event event="positions" handler={onData} />
       </>
     );
   });
