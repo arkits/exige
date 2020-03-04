@@ -12,9 +12,9 @@ const Map = observer(() => {
     const askariStore = useContext(AskariStoreContext);
 
     const [viewport, setViewport] = useState({
-      longitude: -122.43438720703125,
-      latitude: 37.77722770873696,
-      zoom: 9
+        longitude: -122.43438720703125,
+        latitude: 37.77722770873696,
+        zoom: 9
     });
 
     const positions = Object.values(askariStore.positions);
@@ -24,13 +24,13 @@ const Map = observer(() => {
         askariStore.mouseLocation['lng'] = e['lngLat']['lng'];
     };
 
-    const onViewportChange = (updated) =>{
-      setViewport({
-        ...viewport,
-        longitude: updated.getCenter().lng,
-        latitude: updated.getCenter().lat,
-        zoom: updated.getZoom()
-      })
+    const onViewportChange = (updated) => {
+        setViewport({
+            ...viewport,
+            longitude: updated.getCenter().lng,
+            latitude: updated.getCenter().lat,
+            zoom: updated.getZoom()
+        })
     }
     const copyLatLng = (_, e) => {
         let coordinates = {
@@ -52,26 +52,27 @@ const Map = observer(() => {
         <div className="Map">
             <MapGl
                 style="mapbox://styles/mapbox/dark-v9"
-                zoom={[viewport.zoom]}
-                center={[viewport.longitude, viewport.latitude]}
+                // zoom={[viewport.zoom]}
+                // center={[viewport.longitude, viewport.latitude]}
                 containerStyle={{
                     height: 'calc(100vh - 70px)',
                     width: '100vw'
                 }}
                 onMouseMove={updateMouseLocation}
                 onClick={copyLatLng}
-                onMoveEnd={onViewportChange}
-                onZoomEnd={onViewportChange}
-                onPitchEnd={onViewportChange}
+                // onMoveEnd={onViewportChange}
+                // onDragEnd={onViewportChange}
+                // onZoomEnd={onViewportChange}
+                // onPitchEnd={onViewportChange}
             >
                 >
-                {positions.map(position => {
-                    return (
-                        <Layer type="symbol" key={position.vehicleId} id={position.vehicleId} layout={{ 'icon-image': 'airport-15' }}>
-                            <Feature id={position.vehicleId} coordinates={[position.longitude, position.latitude]} />
-                        </Layer>
-                    );
-                })}
+                <Layer type="symbol" id="positions-layer" layout={{ 'icon-image': 'airport-15' }}>
+                    {positions.map(position => {
+                        return (
+                            <Feature id={position.vehicleId} key={position.vehicleId} coordinates={[position.longitude, position.latitude,]} />
+                        );
+                    })}
+                </Layer>
             </MapGl>
         </div>
     );
