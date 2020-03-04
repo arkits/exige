@@ -52,24 +52,24 @@ const Map = observer(() => {
         <div className="Map">
             <MapGl
                 style="mapbox://styles/mapbox/dark-v9"
-                // zoom={[viewport.zoom]}
-                // center={[viewport.longitude, viewport.latitude]}
+                zoom={[viewport.zoom]}
+                center={[viewport.longitude, viewport.latitude]}
                 containerStyle={{
                     height: 'calc(100vh - 70px)',
                     width: '100vw'
                 }}
                 onMouseMove={updateMouseLocation}
                 onClick={copyLatLng}
-                // onMoveEnd={onViewportChange}
-                // onDragEnd={onViewportChange}
-                // onZoomEnd={onViewportChange}
-                // onPitchEnd={onViewportChange}
+                onMoveEnd={onViewportChange}
+                onDragEnd={onViewportChange}
+                onZoomEnd={onViewportChange}
+                onPitchEnd={onViewportChange}
             >
                 >
                 <Layer type="symbol" id="positions-layer" layout={{ 'icon-image': 'airport-15' }}>
                     {positions.map(position => {
                         return (
-                            <Feature id={position.vehicleId} key={position.vehicleId} coordinates={[position.longitude, position.latitude,]} />
+                            <Feature id={position.data.vid} key={position.data.vid} coordinates={[position.data.lonDeg, position.data.latDeg,]} />
                         );
                     })}
                 </Layer>
