@@ -9,7 +9,7 @@ import { AskariStoreContext } from '../store/AskariStore';
 const StoreDump = observer(() => {
     const askariStore = useContext(AskariStoreContext);
     return (
-        <div style={{ display: "flex", overflowY: "scroll", height: "80vh"}}>
+        <div style={{ display: "flex", overflowY: "scroll", height: "78vh"}}>
             <pre >{JSON.stringify(askariStore, null, 2)}</pre>
         </div>
     );
@@ -38,7 +38,7 @@ function About() {
                 </Card>
             </Grid>
             <Grid item xs={12} sm={6}>
-                <Card style={{ maxHeight: '90vh' }}>
+                <Card style={{ maxHeight: '87vh' }}>
                     <CardContent>
                         <Typography variant="h5">Store Dump</Typography>
                         <br />

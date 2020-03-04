@@ -30,7 +30,6 @@ function App() {
               <Inspector />
             </Container>
           </Route>
-
           <Route path="/">
             <Dashboard />
           </Route>
