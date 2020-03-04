@@ -8,7 +8,11 @@ import { AskariStoreContext } from '../store/AskariStore';
 
 const StoreDump = observer(() => {
     const askariStore = useContext(AskariStoreContext);
-    return <pre>{JSON.stringify(askariStore, null, 2)}</pre>;
+    return (
+        <div style={{ display: "flex", overflowY: "scroll", height: "80vh"}}>
+            <pre >{JSON.stringify(askariStore, null, 2)}</pre>
+        </div>
+    );
 });
 
 function About() {
