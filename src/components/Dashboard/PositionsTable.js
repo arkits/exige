@@ -12,20 +12,20 @@ import { AskariStoreContext } from "../../store/AskariStore";
 
 const columns = [
   {
-    id: "vehicleId",
-    label: "vehicleId",
+    id: "vid",
+    label: "vid",
     align: "left",
     format: value => value.toLocaleString()
   },
   {
-    id: "latitude",
-    label: "latitude",
+    id: "latDeg",
+    label: "latDeg",
     align: "right",
     format: value => value.toLocaleString()
   },
   {
-    id: "longitude",
-    label: "longitude",
+    id: "lonDeg",
+    label: "lonDeg",
     align: "right",
     format: value => value.toLocaleString()
   }
@@ -68,9 +68,9 @@ const PositionsTable = observer(() => {
             <TableBody>
               {rows.map(row => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.data.vid}>
                     {columns.map(column => {
-                      const value = row[column.id];
+                      const value = row["data"][column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
                           {column.format && typeof value === "number"

@@ -4,8 +4,16 @@ import SioEvents from "./SioEvents";
 
 const SioClient = () => {
 
-  const uri = "http://localhost:4001";
+  const uri = "http://localhost:8786";
   const options = { transports: ["websocket"] };
+
+  /*
+  const uri = "https://archit.xyz/";
+  const options = { 
+    transports: ["websocket"],
+    path: "/exige/socket.io/" 
+  };
+  */
 
   return (
     <>
