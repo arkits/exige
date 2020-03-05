@@ -38,13 +38,22 @@ function generateFlightPlan(i) {
 }
 
 function flyFlightPlan(flightPlan) {
-    let newLatDeg = flightPlan.latDeg + flightPlan.x / 1000;
-    let newLonDeg = flightPlan.lonDeg + flightPlan.y / 1000;
+
+    let newLatDeg = flightPlan.latDeg + (flightPlan.x / 5000);
+    let newLonDeg = flightPlan.lonDeg + (flightPlan.y / 5000);
 
     flightPlan.latDeg = newLatDeg;
     flightPlan.lonDeg = newLonDeg;
 
     flightPlan.cyclesLapsed = flightPlan.cyclesLapsed + 1;
+
+    if(flightPlan.cyclesLapsed > 30){
+        console.log("Inverting FlightPlan!")
+        flightPlan.cyclesLapsed = 0;
+        let temp_x = flightPlan.x;
+        flightPlan.x = flightPlan.y;
+        flightPlan.x = temp_x;
+    }
 
     return flightPlan;
 }
@@ -91,6 +100,8 @@ setInterval(function() {
         let flightPlan = flightPlans[i];
 
         let newFlightPlan = flyFlightPlan(flightPlan);
+
+        console.log("newFlightPlan.cyclesLapsed - ", newFlightPlan.cyclesLapsed);
 
         // update flightPlans
         flightPlans[i] = newFlightPlan;
