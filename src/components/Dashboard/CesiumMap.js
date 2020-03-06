@@ -17,7 +17,11 @@ const CesiumMap = observer(() => {
     const onClick = data => {
         var { longitudeString, latitudeString } = calculateCoordinateFromCartesian(data.position);
 
-        console.log("You clicked on - ", longitudeString, latitudeString)
+        askariStore.snackbar.message = "Copied location - " + latitudeString + ", " + longitudeString;
+        askariStore.snackbar.isOpen = true;
+
+        navigator.clipboard.writeText(latitudeString + ", " + longitudeString);
+
     };
 
     const calculateCoordinateFromCartesian = cartesianPosition => {
