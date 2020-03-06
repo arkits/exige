@@ -33,7 +33,9 @@ const Dashboard = () => {
     return (
         <div className="Dashboard">
             <CesiumMap />
-
+            <OptionsBar />
+            <RenderPositionsTable />
+            <RenderMouseLocationPanel />
         </div>
     );
 };
