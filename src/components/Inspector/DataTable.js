@@ -107,7 +107,7 @@ const DataTable = observer(() => {
                     <br />
                     <Card
                         style={{
-                            backgroundColor: askariStore.sioStatus === 'CONNECTED' ? 'green' : 'red'
+                            backgroundColor: askariStore.sio.status === 'CONNECTED' ? 'green' : 'red'
                         }}
                     >
                         <CardContent>
@@ -119,7 +119,7 @@ const DataTable = observer(() => {
                                 Socket.IO Status
                             </Typography>
                             <Typography variant="h5" component="h2">
-                                {askariStore.sioStatus}
+                                {askariStore.sio.status}
                             </Typography>
                         </CardContent>
                     </Card>

@@ -1,27 +1,34 @@
-import React from "react";
-import { Socket } from "react-socket-io";
-import SioEvents from "./SioEvents";
+import React, { useContext } from 'react';
+import { Socket } from 'react-socket-io';
+import SioEvents from './SioEvents';
+import { observer } from 'mobx-react';
+import { AskariStoreContext } from '../../store/AskariStore';
 
-const SioClient = () => {
+const SioClient = observer(() => {
+    const uri = 'http://localhost:8786';
+    const options = { transports: ['websocket'] };
 
-  const uri = "http://localhost:8786";
-  const options = { transports: ["websocket"] };
+    const askariStore = useContext(AskariStoreContext);
 
-  /*
-  const uri = "https://archit.xyz/";
-  const options = { 
-    transports: ["websocket"],
-    path: "/exige/socket.io/" 
-  };
-  */
+    /*
+    const uri = "https://archit.xyz/";
+    const options = { 
+      transports: ["websocket"],
+      path: "/exige/socket.io/" 
+    };
+    */
 
-  return (
-    <>
-      <Socket uri={uri} options={options}>
-        <SioEvents />
-      </Socket>
-    </>
-  );
-};
+    if (askariStore.sio.isEnabled) {
+        return (
+            <>
+                <Socket uri={uri} options={options}>
+                    <SioEvents />
+                </Socket>
+            </>
+        );
+    } else {
+        return null;
+    }
+});
 
 export default SioClient;

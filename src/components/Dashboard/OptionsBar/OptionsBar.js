@@ -8,6 +8,12 @@ import ElementToggle from './ElementToggle';
 const OptionsBar = observer(() => {
     const askariStore = useContext(AskariStoreContext);
 
+    const toggleSioConnection = () => {
+        askariStore.snackbar.message = "Toggling Socket.IO Connection...";
+        askariStore.snackbar.isOpen = true;
+        askariStore.sio.isEnabled = !askariStore.sio.isEnabled;
+    }
+
     return (
         <div className="OptionsBar">
             <OptionsButton />
@@ -26,11 +32,12 @@ const OptionsBar = observer(() => {
                     style={{
                         textTransform: 'none',
                         fontFamily: 'IBM Plex Mono',
-                        backgroundColor: askariStore.sioStatus === 'CONNECTED' ? 'green' : 'red',
+                        backgroundColor: askariStore.sio.status === 'CONNECTED' ? 'green' : 'red',
                         fontWeight: 'bold'
                     }}
+                    onClick={toggleSioConnection}
                 >
-                    S.IO: {askariStore.sioStatus}
+                    S.IO: {askariStore.sio.status}
                 </Button>
             </div>
         </div>

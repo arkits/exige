@@ -2,7 +2,10 @@ import { observable, decorate } from "mobx";
 import { createContext } from "react";
 
 class AskariStore {
-  sioStatus = "DISCONNECTED";
+  sio = {
+    status: "DISCONNECTED",
+    isEnabled: false
+  };
   positions = {};
   mouseLocation = {};
   snackbar = {
@@ -22,7 +25,7 @@ class AskariStore {
 }
 
 decorate(AskariStore, {
-  sioStatus: observable,
+  sio: observable,
   positions: observable,
   mouseLocation: observable,
   gridZoomLevel: observable,
