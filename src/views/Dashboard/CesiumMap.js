@@ -6,7 +6,6 @@ import { observer } from 'mobx-react';
 import { AskariStoreContext } from '../../store/AskariStore';
 
 const CesiumMap = observer(() => {
-
     const askariStore = useContext(AskariStoreContext);
 
     let viewer = useRef();
@@ -15,16 +14,12 @@ const CesiumMap = observer(() => {
 
     const operations = Object.values(askariStore.operations);
 
-    const cameraDest = Cartesian3.fromDegrees(-96.90490722656249, 32.90783871693625, 100000);
+    /**
+     * DFW - -96.90490722656249, 32.90783871693625
+     * Test Site - -117.948840950631, 34.739227113042
+     */
 
-    var polygon = Cartesian3.fromDegreesArrayHeights([
-        -96.95091247558592, 32.761294309779, 10000,
-        -96.69960021972656, 32.761294309779, 10000,
-        -96.69960021972656, 32.869206792437, 10000,
-        -96.95091247558592, 32.869206792437, 10000
-    ]);
-
-
+    const cameraDest = Cartesian3.fromDegrees(-117.948840950631, 34.739227113042, 100000);
 
     const onClick = data => {
         var { longitudeString, latitudeString } = calculateCoordinateFromCartesian(data.position);
@@ -86,17 +81,6 @@ const CesiumMap = observer(() => {
         >
             <CameraFlyTo destination={cameraDest} duration={0} once={true} />
 
-            <Entity>
-                <PolygonGraphics
-                    extrudedHeight={0}
-                    perPositionHeight={true}
-                    hierarchy={polygon}
-                    material={Color.ORANGE.withAlpha(0.5)}
-                    outlineColor={Color.BLACK}
-                    outline={true}
-                />
-            </Entity>
-
             {positions.map(position => {
                 const origin = Cartesian3.fromDegrees(
                     position.data.lonDeg,
@@ -119,9 +103,40 @@ const CesiumMap = observer(() => {
             })}
 
             {operations.map(operation => {
-                return (
-                    null
-                );
+
+                let entities = [];
+                
+                for (var operationVolume of operation.operation_volumes) {
+
+                    var id = operation.gufi + '_' + operationVolume.ordinal;
+
+                    var coordsArray = [];
+
+                    for (var coords of operationVolume.protected_geography.coordinates[0]) {
+                        for (var coord of coords) {
+                            coordsArray.push(coord);
+                        }
+                        coordsArray.push(operationVolume.max_altitude_protected_wgs84_ft);
+                    }
+
+                    const polygon = Cartesian3.fromDegreesArrayHeights(coordsArray);
+
+                    entities.push(
+                        <Entity key={id} name={id}>
+                            <PolygonGraphics
+                                name={id}
+                                extrudedHeight={operationVolume.min_altitude_protected_wgs84_ft}
+                                perPositionHeight={true}
+                                hierarchy={polygon}
+                                material={Color.ORANGE.withAlpha(0.5)}
+                                outlineColor={Color.BLACK}
+                                outline={true}
+                            />
+                        </Entity>
+                    );
+                }
+
+                return entities;
             })}
         </Viewer>
     );
