@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import { Cartesian3, Transforms, Math, Color } from 'cesium';
-import { Viewer, CameraFlyTo, Model, PolygonGraphics, Entity } from 'resium';
+import { Viewer, CameraFlyTo, Model, PolygonGraphics, Entity, GeoJsonDataSource } from 'resium';
 import glb from '../../assets/Cesium_Air.glb';
 import { observer } from 'mobx-react';
 import { AskariStoreContext } from '../../store/AskariStore';
@@ -58,8 +58,8 @@ const CesiumMap = observer(() => {
             data.endPosition
         );
 
-        askariStore.mouseLocation['lng'] = longitudeString;
-        askariStore.mouseLocation['lat'] = latitudeString;
+        askariStore.mouseLocation['lng'] = parseFloat(longitudeString);
+        askariStore.mouseLocation['lat'] = parseFloat(latitudeString);
     };
 
     return (
@@ -80,6 +80,8 @@ const CesiumMap = observer(() => {
             }}
         >
             <CameraFlyTo destination={cameraDest} duration={0} once={true} />
+
+            <GeoJsonDataSource data={askariStore.gridTiles.tilesData} fill={Color.ORANGE.withAlpha(0)}/>
 
             {positions.map(position => {
                 const origin = Cartesian3.fromDegrees(
