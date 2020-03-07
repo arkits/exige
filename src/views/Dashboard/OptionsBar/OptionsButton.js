@@ -27,7 +27,13 @@ function OptionsButton() {
         <div>
             <Button
                 variant="contained"
-                style={{ backgroundColor: '#33b5e5' }}
+                style={{
+                    backgroundColor: '#01579b',
+                    fontFamily: 'IBM Plex Mono',
+                    color: 'white',
+                    fontWeight: 'bold'
+
+                }}
                 onClick={handleClickOpen}
                 endIcon={<Icon>settings</Icon>}
             >

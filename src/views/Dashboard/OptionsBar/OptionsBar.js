@@ -32,8 +32,9 @@ const OptionsBar = observer(() => {
                     style={{
                         textTransform: 'none',
                         fontFamily: 'IBM Plex Mono',
-                        backgroundColor: askariStore.sio.status === 'CONNECTED' ? 'green' : 'red',
-                        fontWeight: 'bold'
+                        backgroundColor: askariStore.sio.status === 'CONNECTED' ? '#1b5e20' : '#d50000',
+                        fontWeight: 'bold',
+                        color: 'white'
                     }}
                     onClick={toggleSioConnection}
                 >

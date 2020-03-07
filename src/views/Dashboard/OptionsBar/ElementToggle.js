@@ -21,12 +21,22 @@ const ElementToggle = observer(() => {
                 <Button
                     variant={askariStore.elementsToggle.mouseLocation ? 'contained' : 'outlined'}
                     onClick={() => toggleElement('mouseLocation')}
+                    style={{
+                        fontFamily: 'IBM Plex Mono',
+                        fontWeight: 'bold',
+                        color: 'white'
+                    }}
                 >
                     Mouse Location
                 </Button>
                 <Button
                     variant={askariStore.elementsToggle.positionsTable ? 'contained' : 'outlined'}
                     onClick={() => toggleElement('positionsTable')}
+                    style={{
+                        fontFamily: 'IBM Plex Mono',
+                        fontWeight: 'bold',
+                        color: 'white'
+                    }}
                 >
                     Positions Table
                 </Button>
