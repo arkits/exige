@@ -6,11 +6,14 @@ import { observer } from 'mobx-react';
 import { AskariStoreContext } from '../../store/AskariStore';
 
 const CesiumMap = observer(() => {
+
     const askariStore = useContext(AskariStoreContext);
 
     let viewer = useRef();
 
     const positions = Object.values(askariStore.positions);
+
+    const operations = Object.values(askariStore.operations);
 
     const cameraDest = Cartesian3.fromDegrees(-96.90490722656249, 32.90783871693625, 100000);
 
@@ -20,6 +23,8 @@ const CesiumMap = observer(() => {
         -96.69960021972656, 32.869206792437, 10000,
         -96.95091247558592, 32.869206792437, 10000
     ]);
+
+
 
     const onClick = data => {
         var { longitudeString, latitudeString } = calculateCoordinateFromCartesian(data.position);
@@ -110,6 +115,12 @@ const CesiumMap = observer(() => {
                         minimumPixelSize={128}
                         maximumScale={100}
                     />
+                );
+            })}
+
+            {operations.map(operation => {
+                return (
+                    null
                 );
             })}
         </Viewer>

@@ -3,13 +3,14 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import useStyles from "./styles/useStyles";
 import Container from '@material-ui/core/Container';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Debug from './components/Debug';
-import About from './components/About';
+import Debug from './views/CoolStuff/Debug';
+import About from './views/CoolStuff/About';
 import SioClient from './components/SocketIO/SioClient';
-import Dashboard from './components/Dashboard/Dashboard';
-import Inspector from './components/Inspector/Inspector';
+import Dashboard from './views/Dashboard/Dashboard';
+import Inspector from './views/Inspector/Inspector';
 import AskariSnackbar from './components/AskariSnackbar';
 import ExigeDrawer from './components/ExigeDrawer';
+import Loader from './views/Loader/Loader';
 
 function App() {
     const classes = useStyles();
@@ -25,6 +26,11 @@ function App() {
                         <Route path="/debug">
                             <Container component="main" className={classes.main}>
                                 <Debug />
+                            </Container>
+                        </Route>
+                        <Route path="/loader">
+                            <Container component="main" className={classes.main}>
+                                <Loader />
                             </Container>
                         </Route>
                         <Route path="/about">

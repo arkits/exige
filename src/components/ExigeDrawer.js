@@ -93,6 +93,12 @@ function ExigeDrawer() {
                     </ListItemIcon>
                     <ListItemText>Debug</ListItemText>
                 </ListItem>
+                <ListItem button component={Link} to="/loader">
+                    <ListItemIcon>
+                        <Icon>add</Icon>
+                    </ListItemIcon>
+                    <ListItemText>Load Data</ListItemText>
+                </ListItem>
                 <ListItem button component={Link} to="/about">
                     <ListItemIcon>
                         <Icon>sports_motorsports</Icon>

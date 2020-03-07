@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { observer } from 'mobx-react';
-import { AskariStoreContext } from '../store/AskariStore';
+import { AskariStoreContext } from '../../store/AskariStore';
 
 const StoreDump = observer(() => {
     const askariStore = useContext(AskariStoreContext);
