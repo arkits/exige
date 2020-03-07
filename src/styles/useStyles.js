@@ -1,21 +1,26 @@
 import { makeStyles } from "@material-ui/core/styles";
 
+const drawerWidth = 240;
+
 const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh"
+      display: 'flex'
   },
-  main: {
-    marginTop: theme.spacing(5)
+  appBar: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth
   },
-  footer: {
-    padding: theme.spacing(2, 2),
-    marginTop: "auto",
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.grey[800]
-        : theme.palette.grey[200]
+  drawer: {
+      width: drawerWidth,
+      flexShrink: 0,
+
+  },
+  drawerPaper: {
+      width: drawerWidth
+  },
+  content: {
+      flexGrow: 1,
+      backgroundColor: theme.palette.background.default
   }
 }));
 

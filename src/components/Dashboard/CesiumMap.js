@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import { Cartesian3, Transforms, Math, Color } from 'cesium';
-import { Viewer, CameraFlyTo, Model, EntityDescription, PolygonGraphics, Entity } from 'resium';
+import { Viewer, CameraFlyTo, Model, PolygonGraphics, Entity } from 'resium';
 import glb from '../../assets/Cesium_Air.glb';
 import { observer } from 'mobx-react';
 import { AskariStoreContext } from '../../store/AskariStore';

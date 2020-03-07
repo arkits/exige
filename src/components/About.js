@@ -17,7 +17,7 @@ const StoreDump = observer(() => {
 
 function About() {
     return (
-        <Grid container spacing={3}>
+        <Grid container spacing={3} style={{paddingTop:"30px"}}>
             <Grid item xs={12} sm={6}>
                 <Card>
                     <CardContent>

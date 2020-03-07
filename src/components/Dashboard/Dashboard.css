@@ -1,28 +1,28 @@
 .MouseLocationPanel {
-  position: absolute;
-  top: 60px;
-  right: 0;
-  width: 300px;
-  padding-top: 12px;
-  padding-left: 18px;
-  background-color: rgba(0, 0, 0, 0.62);
-  border-radius: 0px 0px 0px 15px;
+    position: absolute;
+    bottom: 50px;
+    right: 0;
+    width: 300px;
+    padding-top: 12px;
+    padding-left: 18px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px 0px 0px 0px;
 }
 
 .OptionsBar {
-  position: absolute;
-  padding: 10px;
-  bottom: 0px;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 1);
-  display: flex;
-  z-index:1000;
+    position: absolute;
+    padding: 10px;
+    bottom: 0px;
+    width: calc(100% - 240px);
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 1);
+    display: flex;
+    z-index: 1000;
 }
 
 .PositionsTable {
-  position: absolute;
-  top: 60px;
-  left: 0;
-  padding-top: 12px;
-  padding-left: 18px;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    padding-left: 250px;
 }
