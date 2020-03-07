@@ -84,13 +84,23 @@ function ExigeDrawer() {
             </List>
             <Divider />
             <List>
-                <ListItem button component={Link} to="/about">
+                <ListItem>
+                    <div className={classes.dividerTitle}>Cool Stuff</div>
+                </ListItem>
+                <ListItem button component={Link} to="/debug">
                     <ListItemIcon>
                         <Icon>settings</Icon>
                     </ListItemIcon>
                     <ListItemText>Debug</ListItemText>
                 </ListItem>
+                <ListItem button component={Link} to="/about">
+                    <ListItemIcon>
+                        <Icon>sports_motorsports</Icon>
+                    </ListItemIcon>
+                    <ListItemText>About Exige</ListItemText>
+                </ListItem>
             </List>
+            <Divider />
         </Drawer>
     );
 }

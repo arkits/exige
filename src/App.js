@@ -3,6 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import useStyles from "./styles/useStyles";
 import Container from '@material-ui/core/Container';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Debug from './components/Debug';
 import About from './components/About';
 import SioClient from './components/SocketIO/SioClient';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -21,6 +22,11 @@ function App() {
                 <ExigeDrawer />
                 <main className={classes.content}>
                     <Switch>
+                        <Route path="/debug">
+                            <Container component="main" className={classes.main}>
+                                <Debug />
+                            </Container>
+                        </Route>
                         <Route path="/about">
                             <Container component="main" className={classes.main}>
                                 <About />
