@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from 'react';
-import { Cartesian3, Transforms, Math } from 'cesium';
-import { Viewer, CameraFlyTo, Model } from 'resium';
+import { Cartesian3, Transforms, Math, Color } from 'cesium';
+import { Viewer, CameraFlyTo, Model, EntityDescription, PolygonGraphics, Entity } from 'resium';
 import glb from '../../assets/Cesium_Air.glb';
 import { observer } from 'mobx-react';
 import { AskariStoreContext } from '../../store/AskariStore';
@@ -12,31 +12,43 @@ const CesiumMap = observer(() => {
 
     const positions = Object.values(askariStore.positions);
 
-    const cameraDest = Cartesian3.fromDegrees(-122.43438720703125, 37.77722770873696, 20000);
+    const cameraDest = Cartesian3.fromDegrees(-96.90490722656249, 32.90783871693625, 100000);
+
+    var polygon = Cartesian3.fromDegreesArrayHeights([
+        -96.95091247558592, 32.761294309779, 10000,
+        -96.69960021972656, 32.761294309779, 10000,
+        -96.69960021972656, 32.869206792437, 10000,
+        -96.95091247558592, 32.869206792437, 10000
+    ]);
 
     const onClick = data => {
         var { longitudeString, latitudeString } = calculateCoordinateFromCartesian(data.position);
 
-        askariStore.snackbar.message = "Copied location - " + latitudeString + ", " + longitudeString;
+        askariStore.snackbar.message =
+            'Copied location - ' + latitudeString + ', ' + longitudeString;
         askariStore.snackbar.isOpen = true;
 
-        navigator.clipboard.writeText(latitudeString + ", " + longitudeString);
-
+        navigator.clipboard.writeText(latitudeString + ', ' + longitudeString);
     };
 
     const calculateCoordinateFromCartesian = cartesianPosition => {
-        if (!viewer.scene) return;
+        var longitudeString = 0;
+        var latitudeString = 0;
+
+        if (!viewer.scene) return { longitudeString, latitudeString };
 
         var ellipsoid = viewer.scene.globe.ellipsoid;
 
         var cartesian = viewer.scene.camera.pickEllipsoid(cartesianPosition, ellipsoid);
 
-        if (!cartesian) return;
+        if (!cartesian) return { longitudeString, latitudeString };
 
         var cartographicLocation = ellipsoid.cartesianToCartographic(cartesian);
 
-        var longitudeString = Math.toDegrees(cartographicLocation.longitude).toFixed(15);
-        var latitudeString = Math.toDegrees(cartographicLocation.latitude).toFixed(15);
+        longitudeString = Math.toDegrees(cartographicLocation.longitude).toFixed(15);
+        latitudeString = Math.toDegrees(cartographicLocation.latitude).toFixed(15);
+
+        if (!longitudeString || !latitudeString) return { longitudeString, latitudeString };
 
         return { longitudeString, latitudeString };
     };
@@ -68,6 +80,17 @@ const CesiumMap = observer(() => {
             }}
         >
             <CameraFlyTo destination={cameraDest} duration={0} once={true} />
+
+            <Entity>
+                <PolygonGraphics
+                    extrudedHeight={0}
+                    perPositionHeight={true}
+                    hierarchy={polygon}
+                    material={Color.ORANGE.withAlpha(0.5)}
+                    outlineColor={Color.BLACK}
+                    outline={true}
+                />
+            </Entity>
 
             {positions.map(position => {
                 const origin = Cartesian3.fromDegrees(
