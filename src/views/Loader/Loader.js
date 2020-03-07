@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import { observer } from 'mobx-react';
+import { AskariStoreContext } from '../../store/AskariStore';
 
-function Loader() {
+const Loader = observer(() => {
+    const [loadData, setLoadData] = useState(null);
+
+    const askariStore = useContext(AskariStoreContext);
+
+    const loadDataToStore = () => {
+        console.log('We Loading');
+        try {
+            let inputData = JSON.parse(loadData);
+            let gufi = inputData['gufi'];
+            askariStore.operations[gufi] = inputData;
+        } catch (error) {
+            console.error('Caught error when parsing inputData - ', error);
+        }
+    };
+
     return (
         <Grid
             container
@@ -31,30 +51,32 @@ function Loader() {
                             Load Data into Exige
                         </Typography>{' '}
                         <br />
-                        <Typography variant="body1">
-                            Exige is a proof-of-concept traffic visualizer for UAM / UTM data.
-                        </Typography>
-                        <br />
-                        <Typography variant="body1">Exige is built with: </Typography>
-                        <ul>
-                            <li>
-                                <Typography variant="body1">React JS</Typography>
-                            </li>
-                            <li>
-                                <Typography variant="body1">Material-UI</Typography>
-                            </li>
-                            <li>
-                                <Typography variant="body1">Cesium</Typography>
-                            </li>
-                            <li>
-                                <Typography variant="body1">Socket.IO</Typography>
-                            </li>
-                        </ul>
+                        <TextField
+                            id="standard-multiline-static"
+                            label="Load Data"
+                            multiline
+                            rows="10"
+                            variant="outlined"
+                            style={{ width: '100%' }}
+                            onChange={data => setLoadData(data.target.value)}
+                        />
+                        <center>
+                            <br />
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                size="large"
+                                endIcon={<Icon>send</Icon>}
+                                onClick={loadDataToStore}
+                            >
+                                Load Operation
+                            </Button>
+                        </center>
                     </CardContent>
                 </Card>
             </Grid>
         </Grid>
     );
-}
+});
 
 export default Loader;
