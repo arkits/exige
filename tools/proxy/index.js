@@ -1,10 +1,15 @@
 const express = require('express');
 const axios = require('axios');
-
+const cors = require('cors');
 const app = express();
-const port = 3000;
 
-const PROXY_EP = 'https://host_i_want_to_hit.com';
+const config = require('./config');
+
+const port = 8786;
+
+const PROXY_EP = config.PROXY_EP;
+
+app.use(cors());
 
 app.all('/*', async (req, res) => {
 
@@ -26,6 +31,8 @@ app.all('/*', async (req, res) => {
 
     } catch (error) {
 
+        console.log(error);
+
         res.status(error.response.status);
         res.json(error.response.data);
 
@@ -35,4 +42,4 @@ app.all('/*', async (req, res) => {
 
 });
 
-app.listen(port, () => console.log(`Proxy listening on port ${port}!`));
+app.listen(port, 'localhost',  () => console.log(`Proxy listening on port ${port}!`));
