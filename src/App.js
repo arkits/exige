@@ -10,7 +10,7 @@ import Dashboard from './views/Dashboard/Dashboard';
 import Inspector from './views/Inspector/Inspector';
 import AskariSnackbar from './components/AskariSnackbar';
 import ExigeDrawer from './components/ExigeDrawer';
-import NetworkInspector from './views/Inspector/NetworkInspectortor';
+import NetworkInspector from './views/Inspector/NetworkInspector';
 
 function App() {
     const classes = useStyles();
