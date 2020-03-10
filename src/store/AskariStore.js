@@ -16,6 +16,7 @@ class AskariStore {
     };
     elementsToggle = {
         mouseLocation: true,
+        operationsTable: true,
         positionsTable: false
     };
     gridTiles = {

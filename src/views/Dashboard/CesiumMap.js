@@ -6,12 +6,12 @@ import { observer } from 'mobx-react';
 import { AskariStoreContext } from '../../store/AskariStore';
 
 const CesiumMap = observer(() => {
+
     const askariStore = useContext(AskariStoreContext);
 
     let viewer = useRef();
 
     const positions = Object.values(askariStore.positions);
-
     const operations = Object.values(askariStore.operations);
 
     /**

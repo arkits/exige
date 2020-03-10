@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import { observer } from 'mobx-react';
 import { AskariStoreContext } from '../../../store/AskariStore';
 import OptionsButton from './OptionsButton';
+import AddDataButton from './AddDataButton';
 import ElementToggle from './ElementToggle';
 
 const OptionsBar = observer(() => {
@@ -16,8 +17,9 @@ const OptionsBar = observer(() => {
 
     return (
         <div className="OptionsBar">
+            
             <OptionsButton />
-
+            <AddDataButton />
             <ElementToggle />
 
             <div

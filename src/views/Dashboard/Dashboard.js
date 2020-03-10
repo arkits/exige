@@ -5,6 +5,7 @@ import MouseLocationPanel from './MouseLocationPanel';
 import OptionsBar from './OptionsBar/OptionsBar';
 import CesiumMap from './CesiumMap';
 import PositionsTable from './PositionsTable';
+import OperationsTable from './OperationsTable';
 
 import './Dashboard.css';
 
@@ -28,6 +29,16 @@ const RenderPositionsTable = observer(() => {
     }
 });
 
+const RenderOperationsTable = observer(() => {
+    const askariStore = useContext(AskariStoreContext);
+
+    if (askariStore.elementsToggle.operationsTable) {
+        return <OperationsTable />;
+    } else {
+        return null;
+    }
+});
+
 const Dashboard = () => {
     return (
         <div className="Dashboard">
@@ -35,6 +46,7 @@ const Dashboard = () => {
             <OptionsBar />
             <RenderPositionsTable />
             <RenderMouseLocationPanel />
+            <RenderOperationsTable />
         </div>
     );
 };

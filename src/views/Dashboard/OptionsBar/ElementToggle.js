@@ -30,6 +30,17 @@ const ElementToggle = observer(() => {
                     Mouse Location
                 </Button>
                 <Button
+                    variant={askariStore.elementsToggle.operationsTable ? 'contained' : 'outlined'}
+                    onClick={() => toggleElement('operationsTable')}
+                    style={{
+                        fontFamily: 'IBM Plex Mono',
+                        fontWeight: 'bold',
+                        color: 'white'
+                    }}
+                >
+                    Operations
+                </Button>
+                <Button
                     variant={askariStore.elementsToggle.positionsTable ? 'contained' : 'outlined'}
                     onClick={() => toggleElement('positionsTable')}
                     style={{
@@ -38,7 +49,7 @@ const ElementToggle = observer(() => {
                         color: 'white'
                     }}
                 >
-                    Positions Table
+                    Positions
                 </Button>
             </ButtonGroup>
         </div>
