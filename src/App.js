@@ -1,6 +1,6 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import useStyles from "./styles/useStyles";
+import useStyles from './styles/useStyles';
 import Container from '@material-ui/core/Container';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Debug from './views/CoolStuff/Debug';
@@ -10,7 +10,7 @@ import Dashboard from './views/Dashboard/Dashboard';
 import Inspector from './views/Inspector/Inspector';
 import AskariSnackbar from './components/AskariSnackbar';
 import ExigeDrawer from './components/ExigeDrawer';
-import Loader from './views/Loader/Loader';
+import NetworkInspector from './views/Inspector/NetworkInspectortor';
 
 function App() {
     const classes = useStyles();
@@ -28,19 +28,19 @@ function App() {
                                 <Debug />
                             </Container>
                         </Route>
-                        <Route path="/loader">
-                            <Container component="main" className={classes.main}>
-                                <Loader />
-                            </Container>
-                        </Route>
                         <Route path="/about">
                             <Container component="main" className={classes.main}>
                                 <About />
                             </Container>
                         </Route>
-                        <Route path="/inspector">
+                        <Route path="/inspector/traffic">
                             <Container component="main" className={classes.main}>
                                 <Inspector />
+                            </Container>
+                        </Route>
+                        <Route path="/inspector/network">
+                            <Container component="main" className={classes.main}>
+                                <NetworkInspector />
                             </Container>
                         </Route>
                         <Route path="/">
