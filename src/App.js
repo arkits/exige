@@ -7,10 +7,10 @@ import Debug from './views/CoolStuff/Debug';
 import About from './views/CoolStuff/About';
 import SioClient from './components/SocketIO/SioClient';
 import Dashboard from './views/Dashboard/Dashboard';
-import Inspector from './views/Inspector/Inspector';
+import TrafficInspector from './views/Inspector/Traffic/TrafficInspector';
 import AskariSnackbar from './components/AskariSnackbar';
 import ExigeDrawer from './components/ExigeDrawer';
-import NetworkInspector from './views/Inspector/NetworkInspector';
+import NussInspector from './views/Inspector/Nuss/NussInspector';
 
 function App() {
     const classes = useStyles();
@@ -35,12 +35,12 @@ function App() {
                         </Route>
                         <Route path="/inspector/traffic">
                             <Container component="main" className={classes.main}>
-                                <Inspector />
+                                <TrafficInspector />
                             </Container>
                         </Route>
-                        <Route path="/inspector/network">
+                        <Route path="/inspector/nuss">
                             <Container component="main" className={classes.main}>
-                                <NetworkInspector />
+                                <NussInspector />
                             </Container>
                         </Route>
                         <Route path="/">

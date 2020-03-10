@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { observer } from 'mobx-react';
-import { AskariStoreContext } from '../../store/AskariStore';
+import { AskariStoreContext } from '../../../store/AskariStore';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';

@@ -79,7 +79,7 @@ function ExigeDrawer() {
                     <ListItemIcon>
                         <Icon>border_all</Icon>
                     </ListItemIcon>
-                    <ListItemText>Network</ListItemText>
+                    <ListItemText>NUSS</ListItemText>
                 </ListItem>
             </List>
             <Divider />
