@@ -59,9 +59,9 @@ function ExigeDrawer() {
                 </ListItem>
                 <ListItem button component={Link} to="/">
                     <ListItemIcon>
-                        <Icon>map</Icon>
+                        <Icon>public</Icon>
                     </ListItemIcon>
-                    <ListItemText>Map</ListItemText>
+                    <ListItemText>Dashboard</ListItemText>
                 </ListItem>
             </List>
             <Divider />
@@ -69,13 +69,13 @@ function ExigeDrawer() {
                 <ListItem>
                     <div className={classes.dividerTitle}>Inspector</div>
                 </ListItem>
-                <ListItem button component={Link} to="/inspector">
+                <ListItem button component={Link} to="/inspector/traffic">
                     <ListItemIcon>
                         <Icon>airplanemode_active</Icon>
                     </ListItemIcon>
                     <ListItemText>Traffic</ListItemText>
                 </ListItem>
-                <ListItem button>
+                <ListItem button component={Link} to="/inspector/nuss">
                     <ListItemIcon>
                         <Icon>border_all</Icon>
                     </ListItemIcon>
@@ -92,12 +92,6 @@ function ExigeDrawer() {
                         <Icon>settings</Icon>
                     </ListItemIcon>
                     <ListItemText>Debug</ListItemText>
-                </ListItem>
-                <ListItem button component={Link} to="/loader">
-                    <ListItemIcon>
-                        <Icon>add</Icon>
-                    </ListItemIcon>
-                    <ListItemText>Load Data</ListItemText>
                 </ListItem>
                 <ListItem button component={Link} to="/about">
                     <ListItemIcon>
