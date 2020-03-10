@@ -6,7 +6,7 @@ const port = 3000;
 
 const PROXY_EP = 'https://host_i_want_to_hit.com';
 
-app.get('/*', async (req, res) => {
+app.all('/*', async (req, res) => {
 
     console.log(req.method + ' - ' + PROXY_EP + req.url);
 
@@ -15,6 +15,7 @@ app.get('/*', async (req, res) => {
         let proxy_result = await axios({
             method: req.method,
             url: PROXY_EP + req.url,
+            body: req.body,
             headers: {
                 Authorization: req.headers.authorization
             }
