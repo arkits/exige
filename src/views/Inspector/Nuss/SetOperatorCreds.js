@@ -32,9 +32,9 @@ const SetOperatorCreds = ({ setCreds }) => {
         if (!p_user || !p_pass || !p_url) return;
 
         setCreds({
-            username: p_user,
-            password: p_pass,
-            url: p_url
+            exige_username: p_user,
+            exige_password: p_pass,
+            exige_uss_url: p_url
         });
 
         handleClose();
@@ -108,7 +108,7 @@ const SetOperatorCreds = ({ setCreds }) => {
                             variant="outlined"
                             margin="dense"
                             id="url"
-                            label="URL"
+                            label="USS URL"
                             className="input"
                             type="text"
                             fullWidth

@@ -9,18 +9,18 @@ const NussInspector = () => {
     const [loadedOperations, setLoadedOperations] = useState([]);
 
     const [creds, setCreds] = useLocalStorage('creds', {
-        username: '',
-        password: '',
-        url: ''
+        exige_username: '',
+        exige_password: '',
+        exige_uss_url: ''
     });
 
     useEffect(() => {
         axios({
             method: 'GET',
-            url: creds.url + '/operations',
+            url: creds.exige_uss_url + '/operations',
             headers: {
                 'Acces-Control-Allow-Origin': '*',
-                Authorization: 'Basic ' + btoa(creds.username + ':' + creds.password)
+                Authorization: 'Basic ' + btoa(creds.exige_username + ':' + creds.exige_password)
             }
         }).then(res => {
             console.log('Loaded!');
