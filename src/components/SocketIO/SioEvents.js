@@ -8,12 +8,12 @@ const SioEvents = observer(() => {
   
     const onConnect = () => {
       console.log("Connected!");
-      askariStore.sioStatus = "CONNECTED";
+      askariStore.sio.status = "CONNECTED";
     };
 
     const onDisconnect = () => {
       console.log("Disconnect!");
-      askariStore.sioStatus = "DISCONNECTED";
+      askariStore.sio.status = "DISCONNECTED";
     };
   
     const onData = (data) => {
