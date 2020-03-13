@@ -17,9 +17,10 @@ const CesiumMap = observer(() => {
     /**
      * DFW - -96.90490722656249, 32.90783871693625
      * Test Site - -117.948840950631, 34.739227113042
+     * SFO - -122.3789554, 37.6213129
      */
 
-    const cameraDest = Cartesian3.fromDegrees(-117.948840950631, 34.739227113042, 100000);
+    const cameraDest = Cartesian3.fromDegrees( -122.3789554, 37.6213129, 100000);
 
     const onClick = data => {
         var { longitudeString, latitudeString } = calculateCoordinateFromCartesian(data.position);
@@ -34,6 +35,8 @@ const CesiumMap = observer(() => {
     const calculateCoordinateFromCartesian = cartesianPosition => {
         var longitudeString = 0;
         var latitudeString = 0;
+
+        if (!viewer) return { longitudeString, latitudeString };
 
         if (!viewer.scene) return { longitudeString, latitudeString };
 
