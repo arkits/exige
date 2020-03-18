@@ -1,12 +1,11 @@
 import React, { useContext, useRef } from 'react';
-import { Cartesian3, Transforms, Math, Color } from 'cesium';
+import { Cartesian3, Transforms, Math, Color, HeadingPitchRoll } from 'cesium';
 import { Viewer, CameraFlyTo, Model, PolygonGraphics, Entity, GeoJsonDataSource } from 'resium';
 import glb from '../../assets/Cesium_Air.glb';
 import { observer } from 'mobx-react';
 import { AskariStoreContext } from '../../store/AskariStore';
 
 const CesiumMap = observer(() => {
-
     const askariStore = useContext(AskariStoreContext);
 
     let viewer = useRef();
@@ -20,7 +19,7 @@ const CesiumMap = observer(() => {
      * SFO - -122.3789554, 37.6213129
      */
 
-    const cameraDest = Cartesian3.fromDegrees( -122.3789554, 37.6213129, 100000);
+    const cameraDest = Cartesian3.fromDegrees(-122.3789554, 37.6213129, 100000);
 
     const onClick = data => {
         var { longitudeString, latitudeString } = calculateCoordinateFromCartesian(data.position);
@@ -84,16 +83,29 @@ const CesiumMap = observer(() => {
         >
             <CameraFlyTo destination={cameraDest} duration={0} once={true} />
 
-            <GeoJsonDataSource data={askariStore.gridTiles.tilesData} fill={Color.ORANGE.withAlpha(0)}/>
+            <GeoJsonDataSource
+                data={askariStore.gridTiles.tilesData}
+                fill={Color.ORANGE.withAlpha(0)}
+            />
 
             {positions.map(position => {
-                const origin = Cartesian3.fromDegrees(
-                    position.data.lonDeg,
-                    position.data.latDeg,
-                    2000.0
-                );
 
-                const modelMatrix = Transforms.eastNorthUpToFixedFrame(origin);
+                let altitude = 2000.0;
+
+                let center = Cartesian3.fromDegrees(
+                    position.data.lonDeg, 
+                    position.data.latDeg,
+                    altitude
+                    );
+
+                let heading = 90.0;
+                let pitch = 0.0;
+                let roll = 0.0;
+
+                let modelMatrix = Transforms.headingPitchRollToFixedFrame(
+                    center,
+                    new HeadingPitchRoll(heading, pitch, roll)
+                );
 
                 return (
                     <Model
@@ -108,11 +120,9 @@ const CesiumMap = observer(() => {
             })}
 
             {operations.map(operation => {
-
                 let entities = [];
-                
-                for (var operationVolume of operation.operation_volumes) {
 
+                for (var operationVolume of operation.operation_volumes) {
                     var id = operation.gufi + '_' + operationVolume.ordinal;
 
                     var coordsArray = [];
