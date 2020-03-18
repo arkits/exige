@@ -90,21 +90,18 @@ const CesiumMap = observer(() => {
 
             {positions.map(position => {
 
-                let altitude = 2000.0;
-
                 let center = Cartesian3.fromDegrees(
                     position.data.lonDeg, 
                     position.data.latDeg,
-                    altitude
+                    position.data.altFt
                     );
 
-                let heading = 90.0;
                 let pitch = 0.0;
                 let roll = 0.0;
 
                 let modelMatrix = Transforms.headingPitchRollToFixedFrame(
                     center,
-                    new HeadingPitchRoll(heading, pitch, roll)
+                    new HeadingPitchRoll(position.data.trueHeading, pitch, roll)
                 );
 
                 return (
