@@ -111,7 +111,7 @@ const CesiumMap = observer(() => {
                         url={glb}
                         modelMatrix={modelMatrix}
                         minimumPixelSize={128}
-                        maximumScale={100}
+                        maximumScale={10000}
                     />
                 );
             })}
