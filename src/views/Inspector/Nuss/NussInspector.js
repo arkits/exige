@@ -26,7 +26,7 @@ const NussInspector = () => {
             console.log('Loaded!');
             setLoadedOperations(res.data);
         });
-    }, []);
+    }, [creds.exige_username, creds.exige_password, creds.exige_uss_url]);
 
     if (creds.username !== '') {
         return (
