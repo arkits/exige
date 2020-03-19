@@ -113,7 +113,7 @@ const AddDataButton = observer(() => {
                     </center>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} style={{ color: '#33b5e5' }}>
+                    <Button onClick={handleClose}>
                         Close
                     </Button>
                 </DialogActions>
