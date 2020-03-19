@@ -24,6 +24,13 @@ class AskariStore {
         tilesData: null,
         zoomLevel: 10
     };
+    map = {
+        cameraCenter: {
+            latitude: 37.6213129,
+            longitude: -122.3789554,
+            altitude: 100000
+        }
+    }
 }
 
 decorate(AskariStore, {
@@ -33,7 +40,8 @@ decorate(AskariStore, {
     mouseLocation: observable,
     gridZoomLevel: observable,
     snackbar: observable,
-    elementsToggle: observable
+    elementsToggle: observable,
+    map: observable
 });
 
 export const AskariStoreContext = createContext(new AskariStore());
