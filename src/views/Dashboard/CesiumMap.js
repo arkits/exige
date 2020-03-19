@@ -98,10 +98,11 @@ const CesiumMap = observer(() => {
 
                 let pitch = 0.0;
                 let roll = 0.0;
+                let heading = (position.data.trueHeading - 90) * Math.RADIANS_PER_DEGREE;
 
                 let modelMatrix = Transforms.headingPitchRollToFixedFrame(
                     center,
-                    new HeadingPitchRoll(position.data.trueHeading, pitch, roll)
+                    new HeadingPitchRoll(heading, pitch, roll)
                 );
 
                 return (
