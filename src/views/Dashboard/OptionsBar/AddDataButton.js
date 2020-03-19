@@ -25,7 +25,7 @@ const AddDataButton = observer(() => {
         setOpen(false);
     };
 
-    const [loadData, setLoadData] = useState("");
+    const [loadData, setLoadData] = useState('');
 
     const askariStore = useContext(AskariStoreContext);
 
@@ -33,9 +33,18 @@ const AddDataButton = observer(() => {
         console.log('We Loading');
         try {
             let inputData = JSON.parse(loadData);
-            let gufi = inputData['gufi'];
-            askariStore.operations[gufi] = inputData;
-            setLoadData("");
+
+            if (Array.isArray(inputData)) {
+                inputData.forEach(operation => {
+                    let gufi = operation['gufi'];
+                    askariStore.operations[gufi] = operation;
+                });
+            } else {
+                let gufi = inputData['gufi'];
+                askariStore.operations[gufi] = inputData;
+            }
+
+            setLoadData('');
         } catch (error) {
             console.error('Caught error when parsing inputData - ', error);
         }
