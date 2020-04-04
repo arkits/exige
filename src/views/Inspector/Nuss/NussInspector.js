@@ -20,13 +20,16 @@ const NussInspector = () => {
         exige_uss_url: '',
     });
 
+    const [offset, setOffset] = useState(0);
+
     const [error, setError] = useState(null);
 
     const refreshOperations = () => {
         setIsLoading(true);
+        let url = creds.exige_uss_url + '/nuss/operator/operations' + '/?offset=' + offset;
         axios({
             method: 'GET',
-            url: creds.exige_uss_url + '/nuss/operator/operations',
+            url: url,
             headers: {
                 'Acces-Control-Allow-Origin': '*',
                 Authorization: 'Basic ' + btoa(creds.exige_username + ':' + creds.exige_password),
@@ -35,7 +38,7 @@ const NussInspector = () => {
             .then((res) => {
                 setIsLoading(false);
                 console.log('Loaded Operations - ', res.data.length);
-                setLoadedOperations(res.data);
+                setLoadedOperations(loadedOperations.concat(res.data));
             })
             .catch((err) => {
                 setIsLoading(false);
@@ -53,7 +56,7 @@ const NussInspector = () => {
 
     useEffect(() => {
         refreshOperations();
-    }, [creds.exige_username, creds.exige_password, creds.exige_uss_url]);
+    }, [creds.exige_username, creds.exige_password, creds.exige_uss_url, offset]);
 
     if (creds.exige_username !== '') {
         return (
@@ -99,6 +102,26 @@ const NussInspector = () => {
                 <br />
                 <ApiErrorCard error={error} />
                 <NussOperationsTable operations={loadedOperations} />
+
+                <center>
+                    <br />
+                    <br />
+                    <Button
+                        variant="contained"
+                        style={{
+                            backgroundColor: '#f50057',
+                            fontFamily: 'IBM Plex Mono',
+                            color: 'white',
+                            fontWeight: 'bold',
+                        }}
+                        endIcon={<Icon>add</Icon>}
+                        onClick={() => {
+                            setOffset(offset + 10);
+                        }}
+                    >
+                        Load More
+                    </Button>
+                </center>
             </div>
         );
     } else {
