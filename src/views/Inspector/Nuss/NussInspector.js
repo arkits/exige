@@ -5,7 +5,8 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import NussOperationsTable from './NussOperationsTable';
 import SetOperatorCreds from './SetOperatorCreds';
 import ApiErrorCard from './ApiErrorCard';
-
+import Icon from '@material-ui/core/Icon';
+import Button from '@material-ui/core/Button';
 import { useLocalStorage } from '../../../utils/storage';
 
 const NussInspector = () => {
@@ -21,7 +22,7 @@ const NussInspector = () => {
 
     const [error, setError] = useState(null);
 
-    useEffect(() => {
+    const refreshOperations = () => {
         setIsLoading(true);
         axios({
             method: 'GET',
@@ -48,6 +49,10 @@ const NussInspector = () => {
 
                 setError(error);
             });
+    };
+
+    useEffect(() => {
+        refreshOperations();
     }, [creds.exige_username, creds.exige_password, creds.exige_uss_url]);
 
     if (creds.exige_username !== '') {
@@ -67,6 +72,20 @@ const NussInspector = () => {
                         </Typography>
                     </div>
 
+                    <div></div>
+                    <Button
+                        variant="contained"
+                        style={{
+                            backgroundColor: '#1565c0',
+                            fontFamily: 'IBM Plex Mono',
+                            color: 'white',
+                            fontWeight: 'bold',
+                        }}
+                        endIcon={<Icon>refresh</Icon>}
+                        onClick={refreshOperations}
+                    >
+                        Refresh
+                    </Button>
                     <div>
                         <SetOperatorCreds setCreds={setCreds} />
                     </div>
