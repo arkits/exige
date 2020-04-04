@@ -16,7 +16,7 @@ const SetOperatorCreds = ({ setCreds }) => {
 
     const [p_user, setUsername] = React.useState('');
     const [p_pass, setPassword] = React.useState('');
-    const [p_url, setUrl] = React.useState('');
+    const [p_url, setUrl] = React.useState('http://localhost:8786');
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -26,7 +26,7 @@ const SetOperatorCreds = ({ setCreds }) => {
         setOpen(false);
     };
 
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
         if (!p_user || !p_pass || !p_url) return;
@@ -34,7 +34,7 @@ const SetOperatorCreds = ({ setCreds }) => {
         setCreds({
             exige_username: p_user,
             exige_password: p_pass,
-            exige_uss_url: p_url
+            exige_uss_url: p_url,
         });
 
         handleClose();
@@ -49,12 +49,12 @@ const SetOperatorCreds = ({ setCreds }) => {
                     backgroundColor: '#2e7d32',
                     fontFamily: 'IBM Plex Mono',
                     color: 'white',
-                    fontWeight: 'bold'
+                    fontWeight: 'bold',
                 }}
                 onClick={handleClickOpen}
                 endIcon={<Icon>sentiment_satisfied_alt</Icon>}
             >
-                Login
+                Set Operator Credentials
             </Button>
             <Dialog
                 open={open}
@@ -71,7 +71,7 @@ const SetOperatorCreds = ({ setCreds }) => {
                         style={{
                             fontFamily: 'IBM Plex Mono',
                             fontWeight: 'bold',
-                            fontStyle: 'italic'
+                            fontStyle: 'italic',
                         }}
                     >
                         {'Set Operator Credentials'}
@@ -89,7 +89,7 @@ const SetOperatorCreds = ({ setCreds }) => {
                             fullWidth
                             value={p_user}
                             className="input"
-                            onChange={e => setUsername(e.target.value)}
+                            onChange={(e) => setUsername(e.target.value)}
                         />
 
                         <TextField
@@ -101,7 +101,7 @@ const SetOperatorCreds = ({ setCreds }) => {
                             type="password"
                             fullWidth
                             value={p_pass}
-                            onChange={e => setPassword(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
 
                         <TextField
@@ -113,7 +113,7 @@ const SetOperatorCreds = ({ setCreds }) => {
                             type="text"
                             fullWidth
                             value={p_url}
-                            onChange={e => setUrl(e.target.value)}
+                            onChange={(e) => setUrl(e.target.value)}
                         />
                     </form>
                     <br />
@@ -126,7 +126,7 @@ const SetOperatorCreds = ({ setCreds }) => {
                                 size="large"
                                 onClick={handleSubmit}
                             >
-                                Login
+                                Save
                             </Button>
                         </div>
 
