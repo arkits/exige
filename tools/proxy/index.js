@@ -5,6 +5,8 @@ const app = express();
 
 const config = require('./config');
 
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
 const port = 8786;
 
 const PROXY_EP = config.PROXY_EP;
@@ -16,6 +18,8 @@ app.all('/*', async (req, res) => {
     console.log(req.method + ' - ' + PROXY_EP + req.url);
 
     try {
+
+        console.log(req.headers.authorization);
 
         let proxy_result = await axios({
             method: req.method,
@@ -31,7 +35,7 @@ app.all('/*', async (req, res) => {
 
     } catch (error) {
 
-        console.log(error);
+        console.error(`Caught Error - code=${error.response.status}`);
 
         res.status(error.response.status);
         res.json(error.response.data);
