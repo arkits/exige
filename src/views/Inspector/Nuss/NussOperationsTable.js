@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -10,10 +10,11 @@ import TableRow from '@material-ui/core/TableRow';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
+import { observer } from 'mobx-react';
+import { AskariStoreContext } from '../../../store/AskariStore';
 
 const columns = [
     {
@@ -55,10 +56,12 @@ const useStyles = makeStyles({
     },
 });
 
-const NussOperationsTable = ({ operations }) => {
+const NussOperationsTable = observer(({ operations }) => {
     const [open, setOpen] = useState(false);
 
     const [detailedOperation, setDetailedOperation] = useState({});
+
+    const askariStore = useContext(AskariStoreContext);
 
     const handleClickOpen = (operation) => {
         setOpen(true);
@@ -67,6 +70,11 @@ const NussOperationsTable = ({ operations }) => {
 
     const handleClose = () => {
         setOpen(false);
+    };
+
+    const loadOperationToMap = () => {
+        console.log('Loading to Map', detailedOperation.gufi);
+        askariStore.operations[detailedOperation.gufi] = detailedOperation;
     };
 
     const rows = operations;
@@ -136,13 +144,34 @@ const NussOperationsTable = ({ operations }) => {
                     <pre>{JSON.stringify(detailedOperation, null, 4)}</pre>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} color="secondary">
+                    <Button
+                        onClick={loadOperationToMap}
+                        variant="contained"
+                        style={{
+                            backgroundColor: '#e65100',
+                            fontFamily: 'IBM Plex Mono',
+                            color: 'white',
+                            fontWeight: 'bold',
+                        }}
+                    >
+                        Load to Map
+                    </Button>
+                    <Button
+                        onClick={handleClose}
+                        variant="contained"
+                        style={{
+                            backgroundColor: '#f50057',
+                            fontFamily: 'IBM Plex Mono',
+                            color: 'white',
+                            fontWeight: 'bold',
+                        }}
+                    >
                         Close
                     </Button>
                 </DialogActions>
             </Dialog>
         </div>
     );
-};
+});
 
 export default NussOperationsTable;
