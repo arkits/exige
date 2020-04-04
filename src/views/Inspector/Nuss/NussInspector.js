@@ -24,9 +24,16 @@ const NussInspector = () => {
 
     const [error, setError] = useState(null);
 
-    const refreshOperations = () => {
+    const refreshOperations = (clearOptions) => {
+        let operations = loadedOperations;
+        let off = offset;
+        if (clearOptions) {
+            console.log('Clearing previous Operations');
+            operations = [];
+            off = 0;
+        }
         setIsLoading(true);
-        let url = creds.exige_uss_url + '/nuss/operator/operations' + '/?offset=' + offset;
+        let url = creds.exige_uss_url + '/nuss/operator/operations' + '/?offset=' + off;
         axios({
             method: 'GET',
             url: url,
@@ -38,24 +45,25 @@ const NussInspector = () => {
             .then((res) => {
                 setIsLoading(false);
                 console.log('Loaded Operations - ', res.data.length);
-                setLoadedOperations(loadedOperations.concat(res.data));
+                if (off > 0) {
+                    setLoadedOperations(operations.concat(res.data));
+                } else {
+                    setLoadedOperations(res.data);
+                }
             })
             .catch((err) => {
                 setIsLoading(false);
-
                 console.log('Caught Error when getting Operations!', err);
-
                 let error = {
                     message: err.message,
                     status: err.request.status,
                 };
-
                 setError(error);
             });
     };
 
     useEffect(() => {
-        refreshOperations();
+        refreshOperations(false);
     }, [creds.exige_username, creds.exige_password, creds.exige_uss_url, offset]);
 
     if (creds.exige_username !== '') {
@@ -85,7 +93,9 @@ const NussInspector = () => {
                             fontWeight: 'bold',
                         }}
                         endIcon={<Icon>refresh</Icon>}
-                        onClick={refreshOperations}
+                        onClick={() => {
+                            refreshOperations(true);
+                        }}
                     >
                         Refresh
                     </Button>
