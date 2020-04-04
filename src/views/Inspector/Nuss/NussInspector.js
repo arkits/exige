@@ -71,7 +71,7 @@ const NussInspector = () => {
                                 fontWeight: 'bold',
                             }}
                         >
-                            Operations
+                            NUSS > Operations
                         </Typography>
                     </div>
 
