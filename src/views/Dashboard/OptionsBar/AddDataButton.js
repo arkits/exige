@@ -30,7 +30,7 @@ const AddDataButton = observer(() => {
     const askariStore = useContext(AskariStoreContext);
 
     const loadDataToStore = () => {
-        console.log('We Loading');
+        console.log('Adding Operation to AskariStore...');
         try {
             let inputData = JSON.parse(loadData);
 
