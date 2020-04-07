@@ -9,25 +9,32 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { observer } from 'mobx-react';
 import { AskariStoreContext } from '../../store/AskariStore';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
 
 const columns = [
     {
         id: 'gufi',
-        label: 'gufi',
+        label: 'GUFI',
         align: 'left',
         format: (value) => value.toLocaleString(),
     },
     {
         id: 'state',
-        label: 'state',
+        label: 'State',
         align: 'right',
         format: (value) => value.toLocaleString(),
     },
     {
         id: 'uss_name',
-        label: 'uss_name',
+        label: 'USS Name',
         align: 'right',
         format: (value) => value.toLocaleString(),
+    },
+    {
+        id: 'actions',
+        label: 'Actions',
+        align: 'center',
     },
 ];
 
@@ -79,27 +86,43 @@ const OperationsTable = observer(() => {
                             {rows.map((row) => {
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={row.gufi}>
-                                        {columns.map((column) => {
-                                            let value = row[column.id];
-
-                                            if (value == null) {
-                                                value = 'exige.xyz';
-                                            }
-
-                                            return (
-                                                <TableCell
-                                                    key={column.id}
-                                                    align={column.align}
-                                                    onClick={() => {
-                                                        handleClickOpen(row.operation_volumes);
-                                                    }}
-                                                >
-                                                    {column.format && typeof value === 'number'
-                                                        ? column.format(value)
-                                                        : value}
-                                                </TableCell>
-                                            );
-                                        })}
+                                        <TableCell align="left">{row.gufi}</TableCell>
+                                        <TableCell align="right">{row.state}</TableCell>
+                                        <TableCell align="right">exige.xyz</TableCell>
+                                        <TableCell align="right">
+                                            <Button
+                                                size="small"
+                                                variant="contained"
+                                                style={{
+                                                    backgroundColor: '#1565c0',
+                                                    fontFamily: 'IBM Plex Mono',
+                                                    color: 'white',
+                                                    fontWeight: 'bold',
+                                                    marginRight: '10px',
+                                                }}
+                                                endIcon={<Icon>remove_red_eye</Icon>}
+                                                onClick={() => {
+                                                    handleClickOpen(row.operation_volumes);
+                                                }}
+                                            >
+                                                View
+                                            </Button>
+                                            <Button
+                                                size="small"
+                                                variant="contained"
+                                                style={{
+                                                    backgroundColor: '#c2185b',
+                                                    fontFamily: 'IBM Plex Mono',
+                                                    color: 'white',
+                                                    fontWeight: 'bold',
+                                                }}
+                                                onClick={() => {
+                                                    handleClickOpen(row.operation_volumes);
+                                                }}
+                                            >
+                                                Hide
+                                            </Button>
+                                        </TableCell>
                                     </TableRow>
                                 );
                             })}
