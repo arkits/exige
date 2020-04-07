@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -6,18 +6,29 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
 
-export default function OpDetailsTable(operation) {
-    let op = operation.operation;
+const DetailContents = (showRaw, operation) => {
+    let op = showRaw.operation;
 
     let op_vol_len = 0;
-
     try {
         op_vol_len = op.operation_volumes.length;
     } catch (error) {}
 
-    return (
-        <div>
+    if (showRaw.showRaw) {
+        return (
+            <div
+                style={{
+                    textAlign: 'left',
+                }}
+            >
+                <pre>{JSON.stringify(op, null, 4)}</pre>
+            </div>
+        );
+    } else {
+        return (
             <TableContainer component={Paper}>
                 <Table aria-label="simple table">
                     <TableHead>
@@ -54,7 +65,36 @@ export default function OpDetailsTable(operation) {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <br />
+        );
+    }
+};
+
+export default function OpDetailsTable(operation) {
+    const [showRaw, setShowRaw] = useState(false);
+
+    let op = operation.operation;
+
+    return (
+        <div>
+            <center>
+                <Button
+                    variant="contained"
+                    style={{
+                        backgroundColor: '#1565c0',
+                        fontFamily: 'IBM Plex Mono',
+                        color: 'white',
+                        fontWeight: 'bold',
+                    }}
+                    endIcon={<Icon>refresh</Icon>}
+                    onClick={() => {
+                        setShowRaw(!showRaw);
+                    }}
+                >
+                    Toggle Raw
+                </Button>
+                <br /> <br />
+                <DetailContents showRaw={showRaw} operation={op} />
+            </center>
         </div>
     );
 }
