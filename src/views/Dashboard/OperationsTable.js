@@ -15,29 +15,29 @@ const columns = [
         id: 'gufi',
         label: 'gufi',
         align: 'left',
-        format: value => value.toLocaleString()
+        format: (value) => value.toLocaleString(),
     },
     {
         id: 'state',
         label: 'state',
         align: 'right',
-        format: value => value.toLocaleString()
+        format: (value) => value.toLocaleString(),
     },
     {
         id: 'uss_name',
         label: 'uss_name',
         align: 'right',
-        format: value => value.toLocaleString()
-    }
+        format: (value) => value.toLocaleString(),
+    },
 ];
 
 const useStyles = makeStyles({
     root: {
-        width: '100%'
+        width: '100%',
     },
     container: {
-        maxHeight: '80vh'
-    }
+        maxHeight: '80vh',
+    },
 });
 
 const OperationsTable = observer(() => {
@@ -47,6 +47,16 @@ const OperationsTable = observer(() => {
 
     const classes = useStyles();
 
+    const handleClickOpen = (op_vols) => {
+        askariStore.map.cameraCenter.latitude = op_vols[0].flight_geography.coordinates[0][0][1];
+        askariStore.map.cameraCenter.longitude = op_vols[0].flight_geography.coordinates[0][0][0];
+        console.log(
+            'Updated camera - ',
+            askariStore.map.cameraCenter.latitude,
+            askariStore.map.cameraCenter.longitude
+        );
+    };
+
     return (
         <div className="OperationsTable">
             <Paper className={classes.root}>
@@ -54,7 +64,7 @@ const OperationsTable = observer(() => {
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
-                                {columns.map(column => (
+                                {columns.map((column) => (
                                     <TableCell
                                         key={column.id}
                                         align={column.align}
@@ -66,19 +76,24 @@ const OperationsTable = observer(() => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map(row => {
+                            {rows.map((row) => {
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={row.gufi}>
-                                        {columns.map(column => {
-                                            
+                                        {columns.map((column) => {
                                             let value = row[column.id];
 
-                                            if(value == null){
+                                            if (value == null) {
                                                 value = 'exige.xyz';
                                             }
 
                                             return (
-                                                <TableCell key={column.id} align={column.align}>
+                                                <TableCell
+                                                    key={column.id}
+                                                    align={column.align}
+                                                    onClick={() => {
+                                                        handleClickOpen(row.operation_volumes);
+                                                    }}
+                                                >
                                                     {column.format && typeof value === 'number'
                                                         ? column.format(value)
                                                         : value}
