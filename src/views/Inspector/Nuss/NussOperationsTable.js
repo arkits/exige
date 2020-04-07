@@ -15,6 +15,7 @@ import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 import { observer } from 'mobx-react';
 import { AskariStoreContext } from '../../../store/AskariStore';
+import OpDetailsDialog from './OperationDetailsDialog/OpDetailsDialog';
 
 const columns = [
     {
@@ -139,9 +140,11 @@ const NussOperationsTable = observer(({ operations }) => {
                 maxWidth={'md'}
                 onClose={handleClose}
             >
-                <DialogTitle>{'Operation Details'}</DialogTitle>
+                <DialogTitle>
+                    {'Operation Details - '} {detailedOperation.gufi}
+                </DialogTitle>
                 <DialogContent>
-                    <pre>{JSON.stringify(detailedOperation, null, 4)}</pre>
+                    <OpDetailsDialog operation={detailedOperation} />
                 </DialogContent>
                 <DialogActions>
                     <Button
