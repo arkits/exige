@@ -76,6 +76,8 @@ const NussOperationsTable = observer(({ operations }) => {
     const loadOperationToMap = () => {
         console.log('Loading to Map', detailedOperation.gufi);
         askariStore.operations[detailedOperation.gufi] = detailedOperation;
+        askariStore.snackbar.message = 'Drawing Operation on Map - ' + detailedOperation.gufi;
+        askariStore.snackbar.isOpen = true;
     };
 
     const rows = operations;
@@ -157,7 +159,7 @@ const NussOperationsTable = observer(({ operations }) => {
                             fontWeight: 'bold',
                         }}
                     >
-                        Load to Map
+                        Draw on Map
                     </Button>
                     <Button
                         onClick={handleClose}

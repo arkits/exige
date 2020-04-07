@@ -54,7 +54,7 @@ const OperationsTable = observer(() => {
 
     const classes = useStyles();
 
-    const handleClickOpen = (op_vols) => {
+    const viewOnMap = (op_vols) => {
         askariStore.map.cameraCenter.latitude = op_vols[0].flight_geography.coordinates[0][0][1];
         askariStore.map.cameraCenter.longitude = op_vols[0].flight_geography.coordinates[0][0][0];
         console.log(
@@ -62,6 +62,25 @@ const OperationsTable = observer(() => {
             askariStore.map.cameraCenter.latitude,
             askariStore.map.cameraCenter.longitude
         );
+    };
+
+    const hideOp = (gufi) => {
+        let exige_prefs = askariStore.operations[gufi].exige_prefs;
+
+        if (typeof exige_prefs === 'undefined') {
+            askariStore.operations[gufi].exige_prefs = {};
+        }
+
+        let hidden = askariStore.operations[gufi].exige_prefs.hidden;
+
+        if (typeof hidden === 'undefined') {
+            askariStore.operations[gufi].exige_prefs.hidden = false;
+        }
+
+        askariStore.operations[gufi].exige_prefs.hidden = !askariStore.operations[gufi].exige_prefs
+            .hidden;
+
+        console.log('Toggling Hide Op - ', askariStore.operations[gufi].exige_prefs.hidden);
     };
 
     return (
@@ -102,7 +121,7 @@ const OperationsTable = observer(() => {
                                                 }}
                                                 endIcon={<Icon>remove_red_eye</Icon>}
                                                 onClick={() => {
-                                                    handleClickOpen(row.operation_volumes);
+                                                    viewOnMap(row.operation_volumes);
                                                 }}
                                             >
                                                 View
@@ -117,7 +136,7 @@ const OperationsTable = observer(() => {
                                                     fontWeight: 'bold',
                                                 }}
                                                 onClick={() => {
-                                                    handleClickOpen(row.operation_volumes);
+                                                    hideOp(row.gufi);
                                                 }}
                                             >
                                                 Hide

@@ -17,12 +17,16 @@ const CesiumMap = observer(() => {
      * DFW - -96.90490722656249, 32.90783871693625
      * Test Site - -117.948840950631, 34.739227113042
      * SFO - -122.3789554, 37.6213129
-    */
+     */
 
     let cameraCenter = askariStore.map.cameraCenter;
-    let cameraDest = Cartesian3.fromDegrees(cameraCenter.longitude, cameraCenter.latitude, cameraCenter.altitude);
+    let cameraDest = Cartesian3.fromDegrees(
+        cameraCenter.longitude,
+        cameraCenter.latitude,
+        cameraCenter.altitude
+    );
 
-    const onClick = data => {
+    const onClick = (data) => {
         var { longitudeString, latitudeString } = calculateCoordinateFromCartesian(data.position);
 
         askariStore.snackbar.message =
@@ -32,7 +36,7 @@ const CesiumMap = observer(() => {
         navigator.clipboard.writeText(latitudeString + ', ' + longitudeString);
     };
 
-    const calculateCoordinateFromCartesian = cartesianPosition => {
+    const calculateCoordinateFromCartesian = (cartesianPosition) => {
         var longitudeString = 0;
         var latitudeString = 0;
 
@@ -56,7 +60,7 @@ const CesiumMap = observer(() => {
         return { longitudeString, latitudeString };
     };
 
-    const onMouseMove = data => {
+    const onMouseMove = (data) => {
         var { longitudeString, latitudeString } = calculateCoordinateFromCartesian(
             data.endPosition
         );
@@ -78,7 +82,7 @@ const CesiumMap = observer(() => {
             projectionPicker={false}
             onClick={onClick}
             onMouseMove={onMouseMove}
-            ref={e => {
+            ref={(e) => {
                 viewer = e ? e.cesiumElement : null;
             }}
         >
@@ -89,13 +93,12 @@ const CesiumMap = observer(() => {
                 fill={Color.ORANGE.withAlpha(0)}
             />
 
-            {positions.map(position => {
-
+            {positions.map((position) => {
                 let center = Cartesian3.fromDegrees(
-                    position.data.lonDeg, 
+                    position.data.lonDeg,
                     position.data.latDeg,
                     position.data.altFt
-                    );
+                );
 
                 let pitch = 0.0;
                 let roll = 0.0;
@@ -118,7 +121,14 @@ const CesiumMap = observer(() => {
                 );
             })}
 
-            {operations.map(operation => {
+            {operations.map((operation) => {
+                let hidden = operation?.exige?. hidden;
+
+                if (typeof hidden === 'undefined') {
+                    hidden = false;
+                }
+
+                console.log('We Hidden?', hidden);
                 let entities = [];
 
                 for (var operationVolume of operation.operation_volumes) {
