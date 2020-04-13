@@ -4,7 +4,7 @@ import { createContext } from 'react';
 class AskariStore {
     sio = {
         status: 'DISCONNECTED',
-        isEnabled: false
+        isEnabled: false,
     };
     operations = {};
     positions = {};
@@ -12,25 +12,26 @@ class AskariStore {
     snackbar = {
         message: null,
         isOpen: false,
-        type: null
+        type: null,
     };
     elementsToggle = {
         mouseLocation: true,
         operationsTable: true,
-        positionsTable: false
+        positionsTable: false,
     };
     gridTiles = {
         enabled: false,
         tilesData: null,
-        zoomLevel: 10
+        zoomLevel: 10,
     };
     map = {
         cameraCenter: {
             latitude: 37.6213129,
             longitude: -122.3789554,
-            altitude: 100000
-        }
-    }
+            altitude: 100000,
+        },
+    };
+    drawerOpen = true;
 }
 
 decorate(AskariStore, {
@@ -41,7 +42,8 @@ decorate(AskariStore, {
     gridZoomLevel: observable,
     snackbar: observable,
     elementsToggle: observable,
-    map: observable
+    map: observable,
+    drawerOpen: observable,
 });
 
 export const AskariStoreContext = createContext(new AskariStore());

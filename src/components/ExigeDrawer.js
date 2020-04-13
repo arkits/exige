@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
@@ -9,17 +9,32 @@ import Icon from '@material-ui/core/Icon';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
+import clsx from 'clsx';
+import { observer } from 'mobx-react';
+import { AskariStoreContext } from '../store/AskariStore';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0
-    },
+const useStyles = makeStyles((theme) => ({
     drawerPaper: {
+        position: 'relative',
+        whiteSpace: 'nowrap',
         width: drawerWidth,
-        backgroundColor: '#212121'
+        transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    },
+    drawerPaperClose: {
+        overflowX: 'hidden',
+        transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        width: theme.spacing(7),
+        [theme.breakpoints.up('sm')]: {
+            width: theme.spacing(9),
+        },
     },
     title: {
         textDecoration: 'none',
@@ -27,35 +42,43 @@ const useStyles = makeStyles(theme => ({
         fontFamily: 'IBM Plex Mono',
         fontWeight: 'bold',
         fontStyle: 'italic',
-        padding: '15px'
+        padding: '15px',
     },
     dividerTitle: {
         textTransform: 'uppercase',
         fontFamily: 'IBM Plex Mono',
         fontWeight: 'bold',
-        color: '#bdbdbd'
-    }
+        color: '#bdbdbd',
+    },
 }));
 
-function ExigeDrawer() {
+const ExigeDrawer = observer(() => {
     const classes = useStyles();
+
+    const askariStore = useContext(AskariStoreContext);
+
+    const [open, setOpen] = React.useState(true);
+
+    const toggleDrawer = () => {
+        setOpen(!open);
+        askariStore.drawerOpen = !open;
+    };
 
     return (
         <Drawer
-            className={classes.drawer}
             variant="permanent"
             classes={{
-                paper: classes.drawerPaper
+                paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
             }}
-            anchor="left"
+            open={open}
         >
             <Typography component={Link} to="/" variant="h4" className={classes.title}>
-                ~/Exige
+                {open ? '~/Exige' : '~'}
             </Typography>
             <Divider />
             <List>
                 <ListItem>
-                    <div className={classes.dividerTitle}>Views</div>
+                    <div className={classes.dividerTitle}> {open ? 'Views' : ''}</div>
                 </ListItem>
                 <ListItem button component={Link} to="/">
                     <ListItemIcon>
@@ -67,7 +90,7 @@ function ExigeDrawer() {
             <Divider />
             <List>
                 <ListItem>
-                    <div className={classes.dividerTitle}>Inspector</div>
+                    <div className={classes.dividerTitle}>{open ? 'Inspector' : ''}</div>
                 </ListItem>
                 <ListItem button component={Link} to="/inspector/traffic">
                     <ListItemIcon>
@@ -85,7 +108,7 @@ function ExigeDrawer() {
             <Divider />
             <List>
                 <ListItem>
-                    <div className={classes.dividerTitle}>Cool Stuff</div>
+                    <div className={classes.dividerTitle}>{open ? 'Cool Stuff' : ''}</div>
                 </ListItem>
                 <ListItem button component={Link} to="/debug">
                     <ListItemIcon>
@@ -101,8 +124,14 @@ function ExigeDrawer() {
                 </ListItem>
             </List>
             <Divider />
+            <ListItem button onClick={toggleDrawer}>
+                <ListItemIcon>
+                    <Icon>{open ? 'chevron_left' : 'chevron_right'}</Icon>
+                </ListItemIcon>
+                <ListItemText>Toggle Drawer</ListItemText>
+            </ListItem>
         </Drawer>
     );
-}
+});
 
 export default ExigeDrawer;

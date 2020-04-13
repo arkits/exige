@@ -68,7 +68,7 @@ const NussInspector = () => {
 
     if (creds.exige_username !== '') {
         return (
-            <div className="NussInspector" style={{ paddingTop: '30px', paddingLeft: '50px' }}>
+            <div className="NussInspector" style={{ paddingTop: '30px'}}>
                 <div style={{ display: 'flex' }}>
                     <div style={{ flexGrow: '1' }}>
                         <Typography

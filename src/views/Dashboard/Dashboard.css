@@ -13,7 +13,6 @@
     position: absolute;
     padding: 10px;
     bottom: 0px;
-    width: calc(100% - 240px);
     flex-grow: 1;
     background-color: rgba(0, 0, 0, 1);
     display: flex;

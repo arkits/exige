@@ -84,7 +84,12 @@ const OperationsTable = observer(() => {
     };
 
     return (
-        <div className="OperationsTable">
+        <div
+            className="OperationsTable"
+            style={{
+                paddingLeft: askariStore.drawerOpen ? '250px' : '80px',
+            }}
+        >
             <Paper className={classes.root}>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">

@@ -10,14 +10,18 @@ const OptionsBar = observer(() => {
     const askariStore = useContext(AskariStoreContext);
 
     const toggleSioConnection = () => {
-        askariStore.snackbar.message = "Toggling Socket.IO Connection...";
+        askariStore.snackbar.message = 'Toggling Socket.IO Connection...';
         askariStore.snackbar.isOpen = true;
         askariStore.sio.isEnabled = !askariStore.sio.isEnabled;
-    }
+    };
 
     return (
-        <div className="OptionsBar">
-            
+        <div
+            className="OptionsBar"
+            style={{
+                width: askariStore.drawerOpen ? `calc(100% - 240px)` : `calc(100% - 72px)`,
+            }}
+        >
             <OptionsButton />
             <AddDataButton />
             <ElementToggle />
@@ -26,7 +30,7 @@ const OptionsBar = observer(() => {
                 className="leftStatus"
                 style={{
                     marginLeft: 'auto',
-                    textTransform: 'none'
+                    textTransform: 'none',
                 }}
             >
                 <Button
@@ -34,9 +38,10 @@ const OptionsBar = observer(() => {
                     style={{
                         textTransform: 'none',
                         fontFamily: 'IBM Plex Mono',
-                        backgroundColor: askariStore.sio.status === 'CONNECTED' ? '#1b5e20' : '#d50000',
+                        backgroundColor:
+                            askariStore.sio.status === 'CONNECTED' ? '#1b5e20' : '#d50000',
                         fontWeight: 'bold',
-                        color: 'white'
+                        color: 'white',
                     }}
                     onClick={toggleSioConnection}
                 >
