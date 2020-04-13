@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import { Cartesian3, Transforms, Math, Color, HeadingPitchRoll } from 'cesium';
 import { Viewer, CameraFlyTo, Model, PolygonGraphics, Entity, GeoJsonDataSource } from 'resium';
 import glb from '../../assets/Cesium_Air.glb';
@@ -13,18 +13,16 @@ const CesiumMap = observer(() => {
     const positions = Object.values(askariStore.positions);
     const operations = Object.values(askariStore.operations);
 
-    /**
-     * DFW - -96.90490722656249, 32.90783871693625
-     * Test Site - -117.948840950631, 34.739227113042
-     * SFO - -122.3789554, 37.6213129
-     */
-
     let cameraCenter = askariStore.map.cameraCenter;
     let cameraDest = Cartesian3.fromDegrees(
         cameraCenter.longitude,
         cameraCenter.latitude,
         cameraCenter.altitude
     );
+
+    useEffect(() => {
+        console.log("cameraDest got updated!")
+    }, [cameraDest]);
 
     const onClick = (data) => {
         var { longitudeString, latitudeString } = calculateCoordinateFromCartesian(data.position);
@@ -84,9 +82,13 @@ const CesiumMap = observer(() => {
             onMouseMove={onMouseMove}
             ref={(e) => {
                 viewer = e ? e.cesiumElement : null;
+                if(e != null){
+                    viewer.scene.debugShowFramesPerSecond = true;
+                    viewer.scene.requestRenderMode = true;
+                }
             }}
         >
-            <CameraFlyTo destination={cameraDest} duration={0} />
+            <CameraFlyTo destination={cameraDest} duration={1} />
 
             <GeoJsonDataSource
                 data={askariStore.gridTiles.tilesData}
