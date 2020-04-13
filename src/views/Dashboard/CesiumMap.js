@@ -1,6 +1,14 @@
 import React, { useContext, useRef, useEffect } from 'react';
 import { Cartesian3, Transforms, Math, Color, HeadingPitchRoll } from 'cesium';
-import { Viewer, CameraFlyTo, Model, PolygonGraphics, Entity, GeoJsonDataSource } from 'resium';
+import {
+    Viewer,
+    CameraFlyTo,
+    Model,
+    PolygonGraphics,
+    Entity,
+    GeoJsonDataSource,
+    CzmlDataSource,
+} from 'resium';
 import glb from '../../assets/Cesium_Air.glb';
 import { observer } from 'mobx-react';
 import { AskariStoreContext } from '../../store/AskariStore';
@@ -9,6 +17,44 @@ const CesiumMap = observer(() => {
     const askariStore = useContext(AskariStoreContext);
 
     let viewer = useRef();
+
+    const czml = [
+        {
+            id: 'document',
+            name: 'Exige CZML Document',
+            version: '1.0',
+        },
+        {
+            id: 'redLine',
+            name: 'Red line clamped to terain',
+            polyline: {
+                positions: {
+                    cartographicDegrees: [
+                        -122.481612449134758,
+                        37.765350864933517,
+                        2000,
+                        -122.468177537557978,
+                        37.69919680646592,
+                        2000,
+                        -122.366266553993938,
+                        37.457287353908917,
+                        2000,
+                        -122.094199358807458,
+                        37.336619112332095,
+                        2000,
+                    ],
+                },
+                material: {
+                    solidColor: {
+                        color: {
+                            rgba: [255, 0, 0, 255],
+                        },
+                    },
+                },
+                width: 5,
+            },
+        }
+    ];
 
     const positions = Object.values(askariStore.positions);
     const operations = Object.values(askariStore.operations);
@@ -21,7 +67,7 @@ const CesiumMap = observer(() => {
     );
 
     useEffect(() => {
-        console.log("cameraDest got updated!")
+        console.log('cameraDest got updated!');
     }, [cameraDest]);
 
     const onClick = (data) => {
@@ -82,18 +128,20 @@ const CesiumMap = observer(() => {
             onMouseMove={onMouseMove}
             ref={(e) => {
                 viewer = e ? e.cesiumElement : null;
-                if(e != null){
+                if (e != null) {
                     viewer.scene.debugShowFramesPerSecond = true;
                     viewer.scene.requestRenderMode = true;
                 }
             }}
         >
-            <CameraFlyTo destination={cameraDest} duration={1} />
+            <CameraFlyTo destination={cameraDest} duration={0} />
 
             <GeoJsonDataSource
                 data={askariStore.gridTiles.tilesData}
                 fill={Color.ORANGE.withAlpha(0)}
             />
+
+            <CzmlDataSource data={czml} />
 
             {positions.map((position) => {
                 let center = Cartesian3.fromDegrees(
@@ -124,7 +172,7 @@ const CesiumMap = observer(() => {
             })}
 
             {operations.map((operation) => {
-                let hidden = operation?.exige?. hidden;
+                let hidden = operation?.exige?.hidden;
 
                 if (typeof hidden === 'undefined') {
                     hidden = false;
