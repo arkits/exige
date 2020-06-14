@@ -1,0 +1,54 @@
+{
+    "reference": {
+        "id": "2f8343be-6482-4d1b-a474-16847e01af1e",
+        "owner": "exige.xyz"
+    },
+    "details": {
+        "volumes": [
+            {
+                "volume": {
+                    "outline_polygon": {
+                        "vertices": [
+                            {
+                                "lng": -122.50682830810545,
+                                "lat": 37.77587088725018
+                            },
+                            {
+                                "lng": -122.398681640625,
+                                "lat": 37.8065289741725
+                            },
+                            {
+                                "lng": -122.35954284667967,
+                                "lat": 37.71859032558816
+                            },
+                            {
+                                "lng": -122.48794555664061,
+                                "lat": 37.72320698914131
+                            }
+                        ]
+                    },
+                    "altitude_lower": {
+                        "value": 200,
+                        "reference": "W84",
+                        "units": "M"
+                    },
+                    "altitude_upper": {
+                        "value": 500,
+                        "reference": "W84",
+                        "units": "M"
+                    }
+                },
+                "time_start": {
+                    "value": "1985-04-12T23:20:50.52Z",
+                    "format": "RFC3339"
+                },
+                "time_end": {
+                    "value": "1985-04-12T23:20:50.52Z",
+                    "format": "RFC3339"
+                }
+            }
+        ],
+        "state": "Accepted",
+        "vlos": false
+    }
+}

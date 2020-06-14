@@ -33,11 +33,9 @@ const Map = observer(() => {
         var latitudeString = 0;
 
         if (!viewer) return { longitudeString, latitudeString };
-
         if (!viewer.scene) return { longitudeString, latitudeString };
 
         var ellipsoid = viewer.scene.globe.ellipsoid;
-
         var cartesian = viewer.scene.camera.pickEllipsoid(cartesianPosition, ellipsoid);
 
         if (!cartesian) return { longitudeString, latitudeString };
@@ -47,8 +45,6 @@ const Map = observer(() => {
         longitudeString = Math.toDegrees(cartographicLocation.longitude).toFixed(15);
         latitudeString = Math.toDegrees(cartographicLocation.latitude).toFixed(15);
 
-        if (!longitudeString || !latitudeString) return { longitudeString, latitudeString };
-
         return { longitudeString, latitudeString };
     };
 
@@ -56,13 +52,14 @@ const Map = observer(() => {
         var { longitudeString, latitudeString } = calculateCoordinateFromCartesian(
             data.endPosition
         );
-
         exigeStore.mouseLocation['lng'] = parseFloat(longitudeString);
         exigeStore.mouseLocation['lat'] = parseFloat(latitudeString);
     };
 
     Ion.defaultAccessToken =
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzMDJkNjJkYy1iMTAxLTQ5NjktYThmNC0zN2YwNjUxYjBkYjUiLCJpZCI6MTk1NzQsInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1NzU4NDc3OTJ9.YIZUsKDifeCV1hoT4N1kNoASGQzM3yJoox_GLxdD2lo';
+
+    const operations = Object.values(exigeStore.operations);
 
     return (
         <div>
@@ -83,6 +80,52 @@ const Map = observer(() => {
                 onMouseMove={onMouseMove}
             >
                 <CameraFlyTo destination={cameraDest} duration={0} />
+
+                {operations.map((operation) => {
+                    if (operation?.exige?.hidden) {
+                        return null;
+                    }
+
+                    let entities = [];
+
+                    let ordinal = 1;
+
+                    for (var operationVolume of operation.volumes) {
+                        var id = operation.gufi + '_' + ordinal;
+
+                        ordinal++;
+
+                        var coordsArray = [];
+
+                        var volume = operationVolume.volume;
+
+                        var polygon = volume.outline_polygon;
+
+                        for (var point of polygon.vertices) {
+                            coordsArray.push(point.lng);
+                            coordsArray.push(point.lat);
+                            coordsArray.push(volume.altitude_upper.value);
+                        }
+
+                        const cesiumPolygon = Cartesian3.fromDegreesArrayHeights(coordsArray);
+
+                        entities.push(
+                            <Entity key={id} name={id}>
+                                <PolygonGraphics
+                                    name={id}
+                                    extrudedHeight={volume.altitude_lower.value}
+                                    perPositionHeight={true}
+                                    hierarchy={cesiumPolygon}
+                                    material={operation.exige.color}
+                                    outlineColor={Color.BLACK}
+                                    outline={true}
+                                />
+                            </Entity>
+                        );
+                    }
+
+                    return entities;
+                })}
             </Viewer>
         </div>
     );

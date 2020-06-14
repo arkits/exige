@@ -6,11 +6,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import App from './App';
 import theme from './theme';
+import 'mobx-react-lite/batchingForReactDom';
 
+// Loading indicator before React loads
 const loader = document.querySelector('.loader');
-
 const showLoader = () => loader.classList.remove('loader--hide');
-
 const hideLoader = () => loader.classList.add('loader--hide');
 
 ReactDOM.render(

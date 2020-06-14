@@ -21,14 +21,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Settings() {
-    return <h2>Settings</h2>;
-}
-
-function About() {
-    return <h2>About</h2>;
-}
-
 function Inspector() {
     return <h2>Inspector</h2>;
 }
@@ -44,9 +36,6 @@ function App({ hideLoader }) {
                 <main className={classes.content}>
                     <div className={classes.mainContent}>
                         <Switch>
-                            <Route path="/about">
-                                <About />
-                            </Route>
                             <Route path="/inspector">
                                 <Inspector />
                             </Route>

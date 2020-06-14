@@ -11,7 +11,6 @@ import {
     IconButton,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import InfoRoundedIcon from '@material-ui/icons/InfoRounded';
 import TimelineRoundedIcon from '@material-ui/icons/TimelineRounded';
 import DashboardRoundedIcon from '@material-ui/icons/DashboardRounded';
 import GitHubIcon from '@material-ui/icons/GitHub';
@@ -90,15 +89,6 @@ function TemporaryDrawer() {
                                             <TimelineRoundedIcon />
                                         </ListItemIcon>
                                         <ListItemText primary={'Inspector'} />
-                                    </ListItem>
-                                </List>
-                                <Divider />
-                                <List>
-                                    <ListItem button component={RouterLink} to="/about">
-                                        <ListItemIcon>
-                                            <InfoRoundedIcon />
-                                        </ListItemIcon>
-                                        <ListItemText primary={'About Exige'} />
                                     </ListItem>
                                 </List>
                                 <Divider />
