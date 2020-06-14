@@ -1,0 +1,21 @@
+.OptionsBar {
+    position: absolute;
+    padding: 10px;
+    width: 100%;
+    bottom: 0px;
+    flex-grow: 1;
+    background-color: #212121;
+    display: flex;
+    z-index: 1000;
+}
+
+.MouseLocationPanel {
+    position: absolute;
+    bottom: 50px;
+    right: 0;
+    width: 300px;
+    padding-top: 12px;
+    padding-left: 18px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px 0px 0px 0px;
+}
