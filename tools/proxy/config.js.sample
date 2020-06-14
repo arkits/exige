@@ -1,5 +1,0 @@
-const PROXY_EP = 'https://host_to_hit.com';
-
-module.exports = {
-    PROXY_EP
-};
