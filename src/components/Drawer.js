@@ -38,10 +38,10 @@ function TemporaryDrawer() {
             <React.Fragment>
                 <IconButton
                     color="inherit"
-                    aria-label="open drawer"
+                    aria-label="open-drawer"
                     onClick={toggleDrawer(true)}
                     edge="start"
-                    style={{ color: 'white' }}
+                    style={{ color: '#ffffff' }}
                 >
                     <MenuIcon />
                 </IconButton>
@@ -95,15 +95,18 @@ function TemporaryDrawer() {
                             </div>
                             <div style={{ marginBottom: '20px' }}>
                                 <center>
-                                    <a target="_blank" href="https://github.com/arkits/exige">
-                                        <IconButton
-                                            color="white"
-                                            aria-label="upload picture"
-                                            component="span"
-                                        >
-                                            <GitHubIcon />
-                                        </IconButton>
-                                    </a>
+                                    <IconButton
+                                        aria-label="exige-github-link"
+                                        component="span"
+                                        onClick={() => {
+                                            var otherWindow = window.open();
+                                            otherWindow.opener = null;
+                                            otherWindow.location =
+                                                'https://github.com/arkits/exige';
+                                        }}
+                                    >
+                                        <GitHubIcon />
+                                    </IconButton>
                                 </center>
                             </div>
                         </div>
