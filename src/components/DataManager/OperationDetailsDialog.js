@@ -3,40 +3,15 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Typography } from '@material-ui/core';
 
-export default function AboutDialog() {
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
+export default function OperationDetailsDialog({ open, handleClose, detailsData }) {
     return (
         <React.Fragment>
-            <Button
-                variant="contained"
-                onClick={handleClickOpen}
-                style={{
-                    backgroundColor: '#ff5722',
-                    fontFamily: 'IBM Plex Mono',
-                    color: 'white',
-                    fontWeight: 'bold',
-                    fontStyle: 'italic',
-                    textTransform: 'capitalize',
-                }}
-            >
-                ~/Exige by ArKits
-            </Button>
             <Dialog
                 fullWidth
-                maxWidth={'sm'}
+                maxWidth={'md'}
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="about-exige-dialog"
@@ -50,13 +25,11 @@ export default function AboutDialog() {
                             fontSize: '22px',
                         }}
                     >
-                        About ~/Exige
+                        Operation Details
                     </Typography>
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        Exige is a proof-of-concept traffic visualizer for UAM / UTM data.
-                    </DialogContentText>
+                    <pre>{JSON.stringify(detailsData, null, 4)}</pre>
                 </DialogContent>
                 <DialogActions>
                     <Button

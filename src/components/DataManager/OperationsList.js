@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import { observer } from 'mobx-react';
 import { ExigeStoreContext } from '../../store/ExigeStore';
 import { AutoSizer, Column, Table } from 'react-virtualized';
+import OperationDetailsDialog from './OperationDetailsDialog';
 
 const styles = (theme) => ({
     flexContainer: {
@@ -23,7 +24,6 @@ const styles = (theme) => ({
     tableRow: {
         cursor: 'pointer',
     },
-
     tableCell: {
         flex: 1,
     },
@@ -147,8 +147,20 @@ const OperationsTable = observer(() => {
     let operations = exigeStore.operations;
     let rows = Object.values(operations);
 
+    const [detailsDialogOpen, setDetailsDialogOpen] = React.useState(false);
+    const [detailsDialogData, setDetailsDialogData] = React.useState(false);
+
+    const handleDetailsDialogOpen = (detailsData) => {
+        setDetailsDialogOpen(true);
+        setDetailsDialogData(detailsData);
+    };
+
+    const handleDetailsDialogClose = () => {
+        setDetailsDialogOpen(false);
+    };
+
     return (
-        <Paper style={{ height: 500, width: '100%' }}>
+        <Paper style={{ height: 500, width: '100%', backgroundColor: '#263238' }}>
             <VirtualizedTable
                 rowCount={rows.length}
                 rowGetter={({ index }) => rows[index]}
@@ -169,6 +181,15 @@ const OperationsTable = observer(() => {
                         dataKey: 'owner',
                     },
                 ]}
+                onRowClick={(e) => {
+                    handleDetailsDialogOpen(e.rowData);
+                }}
+            />
+
+            <OperationDetailsDialog
+                open={detailsDialogOpen}
+                handleClose={handleDetailsDialogClose}
+                detailsData={detailsDialogData}
             />
         </Paper>
     );
