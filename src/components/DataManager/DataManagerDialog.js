@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import AddDataForm from './AddDataForm';
 import OperationsList from './OperationsList';
@@ -119,10 +118,10 @@ function DataManager() {
                         </Tabs>
                     </Paper>
                     <TabPanel value={tabValue} index={0}>
-                        <OperationsList />
+                        <OperationsList handleDialogClose={handleDialogClose} />
                     </TabPanel>
                     <TabPanel value={tabValue} index={1}>
-                        <AddDataForm />
+                        <AddDataForm handleDialogClose={handleDialogClose} />
                     </TabPanel>
                 </DialogContent>
                 <DialogActions>

@@ -8,6 +8,9 @@ import { observer } from 'mobx-react';
 import { ExigeStoreContext } from '../../store/ExigeStore';
 import { AutoSizer, Column, Table } from 'react-virtualized';
 import OperationDetailsDialog from './OperationDetailsDialog';
+import Button from '@material-ui/core/Button';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import InfoIcon from '@material-ui/icons/Info';
 
 const styles = (theme) => ({
     flexContainer: {
@@ -46,25 +49,53 @@ class MuiVirtualizedTable extends React.PureComponent {
         });
     };
 
-    cellRenderer = ({ cellData, columnIndex }) => {
-        const { columns, classes, rowHeight, onRowClick } = this.props;
-        return (
-            <TableCell
-                component="div"
-                className={clsx(classes.tableCell, classes.flexContainer, {
-                    [classes.noClick]: onRowClick == null,
-                })}
-                variant="body"
-                style={{ height: rowHeight }}
-                align={
-                    (columnIndex != null && columns[columnIndex].numeric) || false
-                        ? 'right'
-                        : 'left'
-                }
-            >
-                {cellData}
-            </TableCell>
-        );
+    cellRenderer = ({ cellData, columnIndex, rowData }) => {
+        const {
+            columns,
+            classes,
+            rowHeight,
+            onRowClick,
+            ViewDetailsButton,
+            ViewOnMapButton,
+        } = this.props;
+        if (columnIndex === 3) {
+            return (
+                <TableCell
+                    component="div"
+                    className={clsx(classes.tableCell, classes.flexContainer, {
+                        [classes.noClick]: onRowClick == null,
+                    })}
+                    variant="body"
+                    style={{ height: rowHeight }}
+                    align={
+                        (columnIndex != null && columns[columnIndex].numeric) || false
+                            ? 'right'
+                            : 'left'
+                    }
+                >
+                    <ViewOnMapButton operation={rowData} />
+                    <ViewDetailsButton operation={rowData} />
+                </TableCell>
+            );
+        } else {
+            return (
+                <TableCell
+                    component="div"
+                    className={clsx(classes.tableCell, classes.flexContainer, {
+                        [classes.noClick]: onRowClick == null,
+                    })}
+                    variant="body"
+                    style={{ height: rowHeight }}
+                    align={
+                        (columnIndex != null && columns[columnIndex].numeric) || false
+                            ? 'right'
+                            : 'left'
+                    }
+                >
+                    {cellData}
+                </TableCell>
+            );
+        }
     };
 
     headerRenderer = ({ label, columnIndex }) => {
@@ -141,7 +172,7 @@ MuiVirtualizedTable.propTypes = {
 
 const VirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
 
-const OperationsTable = observer(() => {
+const OperationsTable = observer(({ handleDialogClose }) => {
     const exigeStore = useContext(ExigeStoreContext);
 
     let operations = exigeStore.operations;
@@ -159,6 +190,45 @@ const OperationsTable = observer(() => {
         setDetailsDialogOpen(false);
     };
 
+    const ViewOnMapButton = ({ operation }) => {
+        return (
+            <>
+                <Button
+                    variant="contained"
+                    size="small"
+                    onClick={() => {
+                        exigeStore.map.cameraCenter.latitude =
+                            operation?.volumes[0].volume?.outline_polygon?.vertices[0].lat;
+                        exigeStore.map.cameraCenter.longitude =
+                            operation?.volumes[0].volume?.outline_polygon?.vertices[0].lng;
+                        handleDialogClose();
+                    }}
+                    startIcon={<VisibilityIcon />}
+                    style={{ marginRight: '10px' }}
+                >
+                    Map
+                </Button>
+            </>
+        );
+    };
+
+    const ViewDetailsButton = ({ operation }) => {
+        return (
+            <>
+                <Button
+                    variant="contained"
+                    size="small"
+                    startIcon={<InfoIcon />}
+                    onClick={() => {
+                        handleDetailsDialogOpen(operation);
+                    }}
+                >
+                    Details
+                </Button>
+            </>
+        );
+    };
+
     return (
         <Paper style={{ height: 500, width: '100%', backgroundColor: '#263238' }}>
             <VirtualizedTable
@@ -171,19 +241,23 @@ const OperationsTable = observer(() => {
                         dataKey: 'gufi',
                     },
                     {
-                        width: 220,
+                        width: 180,
                         label: 'State',
                         dataKey: 'state',
                     },
                     {
-                        width: 300,
+                        width: 120,
                         label: 'Owner',
                         dataKey: 'owner',
                     },
+                    {
+                        width: 220,
+                        label: 'Actions',
+                        dataKey: 'actions',
+                    },
                 ]}
-                onRowClick={(e) => {
-                    handleDetailsDialogOpen(e.rowData);
-                }}
+                ViewDetailsButton={ViewDetailsButton}
+                ViewOnMapButton={ViewOnMapButton}
             />
 
             <OperationDetailsDialog

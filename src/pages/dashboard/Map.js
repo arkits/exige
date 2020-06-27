@@ -1,13 +1,10 @@
 import React, { useRef, useContext, useEffect } from 'react';
-import { Cartesian3, Transforms, Math, Color, HeadingPitchRoll, Ion } from 'cesium';
+import { Cartesian3, Math, Color, Ion } from 'cesium';
 import {
     Viewer,
     CameraFlyTo,
-    Model,
     PolygonGraphics,
     Entity,
-    GeoJsonDataSource,
-    CzmlDataSource,
 } from 'resium';
 import { observer } from 'mobx-react';
 import { ExigeStoreContext } from '../../store/ExigeStore';
@@ -99,12 +96,16 @@ const Map = observer(() => {
 
                         var volume = operationVolume.volume;
 
-                        var polygon = volume.outline_polygon;
+                        var polygon = volume?.outline_polygon;
 
-                        for (var point of polygon.vertices) {
-                            coordsArray.push(point.lng);
-                            coordsArray.push(point.lat);
-                            coordsArray.push(volume.altitude_upper.value);
+                        if (!polygon) {
+                            return;
+                        }
+
+                        for (var point of polygon?.vertices) {
+                            coordsArray.push(point?.lng);
+                            coordsArray.push(point?.lat);
+                            coordsArray.push(volume?.altitude_upper?.value);
                         }
 
                         const cesiumPolygon = Cartesian3.fromDegreesArrayHeights(coordsArray);
@@ -113,7 +114,7 @@ const Map = observer(() => {
                             <Entity key={id} name={id}>
                                 <PolygonGraphics
                                     name={id}
-                                    extrudedHeight={volume.altitude_lower.value}
+                                    extrudedHeight={volume.altitude_lower?.value}
                                     perPositionHeight={true}
                                     hierarchy={cesiumPolygon}
                                     material={operation.exige.color}
