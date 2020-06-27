@@ -1,0 +1,58 @@
+{
+    "reference": {
+        "id": "1ad6c770-d268-4749-8675-c4860f510e07",
+        "owner": "exige.xyz"
+    },
+    "details": {
+        "volumes": [
+            {
+                "volume": {
+                    "outline_polygon": {
+                        "vertices": [
+                            {
+                                "lng": 9.980582850817164,
+                                "lat": 9.98038769564864
+                            },
+                            {
+                                "lng": 9.980390688694534,
+                                "lat": 9.980585843863055
+                            },
+                            {
+                                "lng": 10.019861937948736,
+                                "lat": 10.02005709311726
+                            },
+                            {
+                                "lng": 10.020054117178084,
+                                "lat": 10.01985896200956
+                            },
+                            {
+                                "lng": 9.980582850817164,
+                                "lat": 9.98038769564864
+                            }
+                        ]
+                    },
+                    "altitude_lower": {
+                        "value": -12.191999609856008,
+                        "reference": "W84",
+                        "units": "M"
+                    },
+                    "altitude_upper": {
+                        "value": 18.287999414784014,
+                        "reference": "W84",
+                        "units": "M"
+                    }
+                },
+                "time_start": {
+                    "value": "1985-04-12T23:20:50.52Z",
+                    "format": "RFC3339"
+                },
+                "time_end": {
+                    "value": "1985-04-12T23:20:50.52Z",
+                    "format": "RFC3339"
+                }
+            }
+        ],
+        "state": "Accepted",
+        "vlos": false
+    }
+}
