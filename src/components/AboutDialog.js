@@ -24,7 +24,7 @@ export default function AboutDialog() {
                 variant="contained"
                 onClick={handleClickOpen}
                 style={{
-                    backgroundColor: '#ff5722',
+                    backgroundColor: '#ff3d00',
                     fontFamily: 'IBM Plex Mono',
                     color: 'white',
                     fontWeight: 'bold',
