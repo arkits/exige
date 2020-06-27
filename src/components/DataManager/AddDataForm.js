@@ -4,6 +4,9 @@ import { observer } from 'mobx-react';
 import { ExigeStoreContext } from '../../store/ExigeStore';
 import { TextField, Icon, Typography } from '@material-ui/core';
 import { Color } from 'cesium';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 
 function operationModelParser(operation) {
     let parsedOperation = {};
@@ -32,16 +35,40 @@ function operationModelParser(operation) {
     return parsedOperation;
 }
 
+function FormFeedback({ formResponse }) {
+    if (formResponse.show) {
+        let background = '#aa2e25';
+        if (formResponse.type === 'success') {
+            background = '#357a38';
+        }
+        return (
+            <React.Fragment>
+                <Card style={{ background: background }}>
+                    <CardContent>{formResponse.message}</CardContent>
+                </Card>
+            </React.Fragment>
+        );
+    } else {
+        return null;
+    }
+}
+
 const AddDataForm = observer(() => {
     const [loadData, setLoadData] = useState('');
 
     const exigeStore = useContext(ExigeStoreContext);
 
+    const [formResponse, setFormResponse] = useState({
+        show: false,
+        type: null,
+        message: null,
+    });
+
     const loadDataToStore = () => {
         console.log('Adding Operation to ExigeStore...');
+
         try {
             let inputData = JSON.parse(loadData);
-
             if (Array.isArray(inputData)) {
                 inputData.forEach((operation) => {
                     let parsedOperation = operationModelParser(operation);
@@ -53,10 +80,20 @@ const AddDataForm = observer(() => {
                 let gufi = operation['gufi'];
                 exigeStore.operations[gufi] = operation;
             }
-
-            setLoadData('');
+            setFormResponse({
+                show: true,
+                type: 'success',
+                message: 'Added Operation successfully!',
+            });
         } catch (error) {
             console.error('Caught error when parsing inputData - ', error);
+            setFormResponse({
+                show: true,
+                type: 'fail',
+                message: 'Caught error when parsing - ' + error.message,
+            });
+        } finally {
+            setLoadData('');
         }
     };
 
@@ -64,7 +101,6 @@ const AddDataForm = observer(() => {
         <React.Fragment>
             <Typography variant="h6">Add Data to Exige</Typography> <br></br>
             <TextField
-                id="standard-multiline-static"
                 label="Load Data"
                 multiline
                 rows="10"
@@ -74,6 +110,8 @@ const AddDataForm = observer(() => {
                 value={loadData}
             />
             <center>
+                <br />
+                <FormFeedback formResponse={formResponse} />
                 <br />
                 <Button
                     variant="contained"
