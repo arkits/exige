@@ -5,21 +5,32 @@ import { ExigeStoreContext } from '../../store/ExigeStore';
 import { TextField, Icon, Typography } from '@material-ui/core';
 import { Color } from 'cesium';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import uuid from 'uuid-random';
 
 function operationModelParser(operation) {
     let parsedOperation = {};
 
-    let gufi = operation?.reference?.id;
+    let gufi = operation?.operation?.reference?.id;
+    if (!gufi) {
+        gufi = uuid();
+    }
 
-    let owner = operation?.reference?.owner;
-    owner = owner.toLowerCase();
+    let owner = operation?.operation?.reference?.owner;
+    if (owner) {
+        owner = owner.toLowerCase();
+    } else {
+        owner = 'exige.xyz';
+    }
 
-    let state = operation?.details?.state;
-    state = state.toUpperCase();
+    let state = operation?.operation?.details?.state;
+    if (state) {
+        state = state.toUpperCase();
+    } else {
+        state = 'UNKNOWN';
+    }
 
-    let volumes = operation?.details?.volumes;
+    let volumes = operation?.operation?.details?.volumes;
 
     parsedOperation['gufi'] = gufi;
     parsedOperation['owner'] = owner;

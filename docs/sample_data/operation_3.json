@@ -1,0 +1,77 @@
+{
+    "operation_id": "2f8343be-6482-4d1b-a474-16847e01af1e",
+    "operation": {
+        "reference": {
+            "id": "2f8343be-6482-4d1b-a474-16847e01af1e",
+            "owner": "exige.xyz",
+            "version": 1,
+            "time_start": {
+                "value": "1985-04-12T23:20:50.52Z",
+                "format": "RFC3339"
+            },
+            "time_end": {
+                "value": "1985-04-12T23:20:50.52Z",
+                "format": "RFC3339"
+            },
+            "uss_base_url": "https://utm_uss.com/utm"
+        },
+        "details": {
+            "volumes": [
+                {
+                    "volume": {
+                        "outline_polygon": {
+                            "vertices": [
+                                {
+                                    "lng": -112.690715789795,
+                                    "lat": 33.7155586167857
+                                },
+                                {
+                                    "lng": -112.678956985474,
+                                    "lat": 33.7164153436381
+                                },
+                                {
+                                    "lng": -112.678699493408,
+                                    "lat": 33.7109178644436
+                                },
+                                {
+                                    "lng": -112.692003250122,
+                                    "lat": 33.7106322714921
+                                },
+                                {
+                                    "lng": -112.690715789795,
+                                    "lat": 33.7155586167857
+                                }
+                            ]
+                        },
+                        "altitude_lower": {
+                            "value": 10,
+                            "reference": "W84",
+                            "units": "M"
+                        },
+                        "altitude_upper": {
+                            "value": 1000,
+                            "reference": "W84",
+                            "units": "M"
+                        }
+                    },
+                    "time_start": {
+                        "value": "1985-04-12T23:20:50.52Z",
+                        "format": "RFC3339"
+                    },
+                    "time_end": {
+                        "value": "1985-04-12T23:20:50.52Z",
+                        "format": "RFC3339"
+                    }
+                }
+            ],
+            "state": "Accepted",
+            "vlos": false
+        }
+    },
+    "subscriptions": [
+        {
+            "subscription_id": "78ea3fe8-71c2-4f5c-9b44-9c02f5563c6f",
+            "notification_index": 0
+        }
+    ]
+}
