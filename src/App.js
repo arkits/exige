@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AppBar from './components/AppBar';
 import { makeStyles } from '@material-ui/core/styles';
 import Dashboard from './pages/dashboard/Dashboard';
+import Inspector from './pages/inspector/Inspector';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,10 +21,6 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
     },
 }));
-
-function Inspector() {
-    return <h2>Inspector</h2>;
-}
 
 function App({ hideLoader }) {
     const classes = useStyles();
